@@ -22,13 +22,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class listeVol extends AppCompatActivity {
 
     ListView listView;
 
     List<Vol> Vol;
     //private static String API_URL="http://api.androidhive.info/Vol/";
-    private static String API_URL="http://10.75.25.250:8080/api_Aerosoft/api/crudVol/read.php";
+    private static String API_URL="http://192.168.1.137:80/api_Aerosoft/api/crudVol/read.php";
 
    // Adapter adapter;
 
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.liste_vol);
 
         listView = (ListView) findViewById(R.id.listView);
 

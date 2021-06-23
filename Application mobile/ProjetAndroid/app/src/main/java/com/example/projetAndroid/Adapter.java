@@ -18,7 +18,7 @@ public class Adapter extends ArrayAdapter<Vol> {
 
 
     public Adapter(List<Vol> Vol, Context mCtx){
-        super(mCtx, R.layout.cutom_list_layout,Vol);
+        super(mCtx, R.layout.table_vol,Vol);
         this.Vol = Vol;
         this.mCtx = mCtx;
 
@@ -32,18 +32,23 @@ public class Adapter extends ArrayAdapter<Vol> {
         LayoutInflater inflater = LayoutInflater.from(mCtx);
 
         //creating a view with our xml layout
-        View listViewItem = inflater.inflate(R.layout.cutom_list_layout, null, true);
+        View listViewItem = inflater.inflate(R.layout.table_vol, null, true);
 
         //getting text views
-        TextView tvName = listViewItem.findViewById(R.id.circleTitle);
-        TextView tvDesc = listViewItem.findViewById(R.id.circledescription);
-
+        TextView NumVol = listViewItem.findViewById(R.id.NumVol);
+        TextView AeroportDept  = listViewItem.findViewById(R.id.AeroportDept);
+        TextView HDepart  = listViewItem.findViewById(R.id.HDepart);
+        TextView AeroportArr  = listViewItem.findViewById(R.id.AeroportArr);
+        TextView HArrivee   = listViewItem.findViewById(R.id.HArrivee);
         //getting the circle for the specific possition
         Vol vol = Vol.get(position);
 
         //setting the textview values
-        tvName.setText(vol.getNumVol());
-        tvDesc.setText(vol.getAeroportArr() + " " + vol.getHArrivee());
+        NumVol.setText(vol.getNumVol());
+        AeroportDept.setText(vol.getAeroportDept());
+        HDepart.setText(vol.getHDepart());
+        AeroportArr.setText(vol.getAeroportArr());
+        HArrivee.setText(vol.getHArrivee());
        // tvDesc.setText(vol.getEmail());
 
         return listViewItem;
