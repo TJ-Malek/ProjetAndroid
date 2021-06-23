@@ -46,9 +46,9 @@ public class Adapter extends ArrayAdapter<Vol> {
         //setting the textview values
         NumVol.setText(vol.getNumVol());
         AeroportDept.setText(vol.getAeroportDept());
-        HDepart.setText(vol.getHDepart());
+        HDepart.setText(vol.getHDepart().substring(0,5));
         AeroportArr.setText(vol.getAeroportArr());
-        HArrivee.setText(vol.getHArrivee());
+        HArrivee.setText(vol.getHArrivee().substring(0,5));
        // tvDesc.setText(vol.getEmail());
 
         return listViewItem;
