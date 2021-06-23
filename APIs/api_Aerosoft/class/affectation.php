@@ -12,7 +12,7 @@
         public $NumVol;
         public $DateVol;
         public $AffectationCode;
-        public $HArrivee;
+        public $NumAvion;
        
 
         // Db connection
@@ -22,7 +22,7 @@
 
         // GET ALL
         public function getAffectations(){
-            $sqlQuery = "SELECT IdAffectation, NumVol, DateVol, AffectationCode, HArrivee FROM " . $this->db_table . "";
+            $sqlQuery = "SELECT IdAffectation, NumVol, DateVol, AffectationCode, NumAvion FROM " . $this->db_table . "";
             $stmt = $this->conn->prepare($sqlQuery);
             $stmt->execute();
             return $stmt;
@@ -36,7 +36,7 @@
             NumVol, 
             DateVol, 
             AffectationCode, 
-            HArrivee 
+            NumAvion 
          
           FROM
             ". $this->db_table ."
@@ -59,9 +59,9 @@
            
             $dataRow = $this->VerifAffectation();
             $this->NumVol = $dataRow['NumVol'];
-            $this->DateVol = $dataRow['HDepart'];
+            $this->DateVol = $dataRow['DateVol'];
             $this->AffectationCode = $dataRow['AffectationCode'];
-            $this->HArrivee = $dataRow['HArrivee'];
+            $this->NumAvion = $dataRow['NumAvion'];
            
         }        
 
