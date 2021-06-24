@@ -20,8 +20,8 @@
     $item->Prenom = $data->Prenom;
     $item->Mail = $data->Mail;
     $item->MotDePasse = $data->MotDePasse;
-    $item->Statut = $data->Statut;
-    $item->IdRole = $data->IdRole;
+   /* $item->Statut = $data->Statut;
+    $item->IdRole = $data->IdRole;*/
 
     if($item->createUtilisateur()){
         echo 'Utilisateur created successfully.';

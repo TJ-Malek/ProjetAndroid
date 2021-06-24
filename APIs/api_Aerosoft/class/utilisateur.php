@@ -55,8 +55,8 @@
                 $this->Prenom=htmlspecialchars(strip_tags($this->Prenom));
                 $this->Mail=htmlspecialchars(strip_tags($this->Mail));
                 $this->MotDePasse=htmlspecialchars(strip_tags($this->MotDePasse));
-                $this->Statut=htmlspecialchars(strip_tags($this->Statut));
-                $this->IdRole=htmlspecialchars(strip_tags($this->IdRole));
+                $this->Statut=0;
+                $this->IdRole="11111";
 
                 // bind data
                 $stmt->bindParam(":IdUtilisateur", $this->IdUtilisateur);
