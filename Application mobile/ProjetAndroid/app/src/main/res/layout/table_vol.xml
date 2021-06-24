@@ -3,29 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <ScrollView
-        android:id="@+id/layout"
-        android:layout_height="match_parent"
-        android:scrollbars="horizontal|vertical"
-        android:layout_width="match_parent"
-        android:layout_marginTop="5dip"
-        android:scrollbarStyle="outsideInset"
-        android:fillViewport="true">
 
-        <HorizontalScrollView
-            android:id="@+id/horizontalView"
-            android:layout_height="wrap_content"
-            android:scrollbars="horizontal|vertical"
-            android:layout_width="wrap_content"
-            android:layout_marginTop="5dip">
 
             <TableLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:stretchColumns="1">
+                android:stretchColumns="1"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                >
 
                 <TableRow  android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    >
 
 
                     <!--app:layout_constraintBottom_toBottomOf="parent"
@@ -45,7 +37,8 @@
                         android:layout_marginTop="8dp"
                         android:text="NumVol"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:visibility="invisible"/>
 
                     <TextView
                         android:id="@+id/AeroportDeptTitle"
@@ -56,7 +49,9 @@
                         android:layout_marginTop="8dp"
                         android:text="AeroDept"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:visibility="invisible"
+                        />
                     <TextView
                         android:id="@+id/HDepartTitle"
                         android:layout_width="wrap_content"
@@ -65,7 +60,8 @@
                         android:layout_marginTop="8dp"
                         android:text="HDepart"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:visibility="invisible"/>
                     <TextView
                         android:id="@+id/AeroportArrTitle"
                         android:layout_width="wrap_content"
@@ -74,7 +70,8 @@
                         android:layout_marginTop="8dp"
                         android:text="AeroArr"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:visibility="invisible"/>
                     <TextView
                         android:id="@+id/HArriveeTitle"
                         android:layout_width="wrap_content"
@@ -84,14 +81,16 @@
                         android:text="HArrivee"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        />
+                        android:visibility="invisible" />
                     <!--app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/coverImage"
                     app:layout_constraintTop_toBottomOf="@+id/circleTitle" -->
 
                 </TableRow>
-                <TableRow>
+                <TableRow android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    >
 
                     <TextView
                         android:id="@+id/NumVol"
@@ -140,6 +139,5 @@
                         />
                 </TableRow>
             </TableLayout>
-        </HorizontalScrollView>
-    </ScrollView>
+
 </LinearLayout>

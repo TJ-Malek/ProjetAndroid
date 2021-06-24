@@ -1,9 +1,11 @@
 package com.example.projetAndroid;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -33,7 +35,7 @@ public class Adapter extends ArrayAdapter<Vol> {
 
         //creating a view with our xml layout
         View listViewItem = inflater.inflate(R.layout.table_vol, null, true);
-
+        listViewItem.setFocusable(false);
         //getting text views
         TextView NumVol = listViewItem.findViewById(R.id.NumVol);
         TextView AeroportDept  = listViewItem.findViewById(R.id.AeroportDept);
@@ -50,6 +52,7 @@ public class Adapter extends ArrayAdapter<Vol> {
         AeroportArr.setText(vol.getAeroportArr());
         HArrivee.setText(vol.getHArrivee().substring(0,5));
        // tvDesc.setText(vol.getEmail());
+
 
         return listViewItem;
 

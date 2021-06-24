@@ -1,9 +1,13 @@
 package com.example.projetAndroid;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +32,7 @@ public class listeVol extends AppCompatActivity {
 
     List<Vol> Vol;
     //private static String API_URL="http://api.androidhive.info/Vol/";
-    private static String API_URL="http://192.168.1.137:80/api_Aerosoft/api/crudVol/read.php";
+    private static String API_URL="http://10.75.25.250:8080/api_Aerosoft/api/crudVol/read.php";
 
    // Adapter adapter;
 
@@ -37,12 +41,15 @@ public class listeVol extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.liste_vol);
+        Log.i("message", "create.");
+      listView = (ListView) findViewById(R.id.listView);
+       /*TextView textView = new TextView(context);
+        textView.setText("Hello. I'm a header view");
 
-        listView = (ListView) findViewById(R.id.listView);
-
+        listView.addHeaderView(textView);*/
         Vol= new ArrayList<>();
-        extractVol();
 
+        extractVol();
 
 
     }
@@ -83,7 +90,20 @@ public class listeVol extends AppCompatActivity {
 
                             }
                             Adapter adapter = new Adapter(Vol, getApplicationContext());
+                            /*adapter.notifyDataSetChanged();
+                            listView.invalidateViews();*/
                             listView.setAdapter(adapter);
+                            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    Log.i("message", "test.");
+                                    Vol vol =  Vol.get(position);
+                                    Intent i = new Intent(listeVol.this, EditVol.class);
+                                    i.putExtra("id", vol.getNumVol());
+
+                                    startActivity(i);
+
+                                } });
 
                         } catch (JSONException e) {
                             e.printStackTrace();

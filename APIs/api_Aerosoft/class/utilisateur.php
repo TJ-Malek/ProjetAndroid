@@ -61,7 +61,7 @@
                 // bind data
                 $stmt->bindParam(":IdUtilisateur", $this->IdUtilisateur);
                 $stmt->bindParam(":Nom", $this->Nom);
-                $stmt->bindParam(":Prenom ", $this->Prenom);
+                $stmt->bindParam(":Prenom", $this->Prenom);
                 $stmt->bindParam(":Mail", $this->Mail);
                 $stmt->bindParam(":MotDePasse", $this->MotDePasse);
                 $stmt->bindParam(":Statut", $this->Statut);

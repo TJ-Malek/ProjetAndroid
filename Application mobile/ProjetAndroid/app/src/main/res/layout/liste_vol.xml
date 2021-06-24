@@ -5,71 +5,95 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".listeVol">
+            <TextView
+                android:id="@+id/NumVolTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-    <TextView
-        android:id="@+id/NumVolTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="8dp"
+                android:text="NumVol"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="8dp"
-        android:text="NumVol"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+            <TextView
+                android:id="@+id/AeroportDeptTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-    <TextView
-        android:id="@+id/AeroportDeptTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="8dp"
+                android:text="AeroDept"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/NumVolTitle"/>
+            <TextView
+                android:id="@+id/HDepartTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="8dp"
+                android:text="HDepart"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/AeroportDeptTitle"/>
+            <TextView
+                android:id="@+id/AeroportArrTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="8dp"
+                android:text="AeroArr"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/HDepartTitle"/>
+            <TextView
+                android:id="@+id/HArriveeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="8dp"
+                android:text="HArrivee"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/AeroportArrTitle"
+                />
 
-        android:layout_marginLeft="6dp"
-        android:layout_marginTop="8dp"
-        android:text="AeroDept"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_toRightOf="@id/NumVolTitle"/>
-    <TextView
-        android:id="@+id/HDepartTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="8dp"
-        android:text="HDepart"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_toRightOf="@id/AeroportDeptTitle"/>
-    <TextView
-        android:id="@+id/AeroportArrTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="8dp"
-        android:text="AeroArr"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_toRightOf="@id/HDepartTitle"/>
-    <TextView
-        android:id="@+id/HArriveeTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="8dp"
-        android:text="HArrivee"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_toRightOf="@id/AeroportArrTitle"
-        />
-    <ListView
-        android:id="@+id/listView"
-        android:background="#FAFAFA"
-        android:layout_width="match_parent"
+    <ScrollView
+        android:id="@+id/layout"
         android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_below="@id/HArriveeTitle"/>
+        android:scrollbars="horizontal|vertical"
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dip"
+        android:scrollbarStyle="outsideInset"
+        android:fillViewport="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:layout_below="@+id/HArriveeTitle"
+        >
 
+        <HorizontalScrollView
+            android:id="@+id/horizontalView"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal|vertical"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="5dip"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+
+            >
+            <ListView
+                android:id="@+id/listView"
+                android:background="#FAFAFA"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_below="@id/HArriveeTitle"/>
+        </HorizontalScrollView>
+    </ScrollView>
     <ProgressBar
         android:visibility="gone"
         android:id="@+id/progressBar"
