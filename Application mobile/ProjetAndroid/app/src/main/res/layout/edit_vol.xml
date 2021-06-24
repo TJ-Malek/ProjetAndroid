@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/NumVol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NumVol : "
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="40dp"
+        android:layout_marginTop="18dp"/>
+
+
+    <TextView
+        android:id="@+id/NumVolBD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="40dp"
+        android:layout_marginTop="18dp"
+        android:layout_toRightOf="@+id/NumVol"/>
+    <TextView
+        android:id="@+id/AeroportDept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AeroportDept : "
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="40dp"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/NumVol"/>
+
+    <EditText
+        android:id="@+id/AeroportDeptBD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="113dp"
+        tools:layout_editor_absoluteY="76dp"
+        android:layout_toRightOf="@+id/AeroportDept"
+        android:layout_below="@+id/NumVol"/>
+
+
+</RelativeLayout>

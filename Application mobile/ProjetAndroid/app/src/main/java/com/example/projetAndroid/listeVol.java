@@ -42,7 +42,7 @@ public class listeVol extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.liste_vol);
         Log.i("message", "create.");
-      listView = (ListView) findViewById(R.id.listView);
+        listView = (ListView) findViewById(R.id.listView);
        /*TextView textView = new TextView(context);
         textView.setText("Hello. I'm a header view");
 
@@ -99,7 +99,7 @@ public class listeVol extends AppCompatActivity {
                                     Log.i("message", "test.");
                                     Vol vol =  Vol.get(position);
                                     Intent i = new Intent(listeVol.this, EditVol.class);
-                                    i.putExtra("id", vol.getNumVol());
+                                    i.putExtra("NumVol", vol.getNumVol());
 
                                     startActivity(i);
 
