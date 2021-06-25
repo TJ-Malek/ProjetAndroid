@@ -35,7 +35,6 @@
         // CREATE
         public function createUtilisateur(){
             if($this->VerifUser()==null){
-                echo json_encode("we in");
                 $sqlQuery = "INSERT INTO ". $this->db_table[0] ."
                         SET 
                             IdUtilisateur = :IdUtilisateur,
@@ -67,8 +66,6 @@
                 $stmt->bindParam(":Statut", $this->Statut);
                 $stmt->bindParam(":IdRole", $this->IdRole);
 
-                echo json_encode($this->IdUtilisateur." ". $this->Nom ." ". $this->Prenom ." ". $this->Mail . " ". $this->MotDePasse . " ". $this->Statut." ". $this->IdRole);
-                echo json_encode($stmt);
                 if($stmt->execute()){
                 return true;
                 }
@@ -79,17 +76,11 @@
             }
         }
         public function VerifUser(){
-            $sqlQuery = "SELECT
-                         
-            Nom, 
-            Prenom , 
-            Mail, 
-            MotDePasse,
-            Statut,
-            IdRole
-         
+            $sqlQuery = "SELECT *         
           FROM
             ". $this->db_table[0] ."
+            INNER JOIN " . $this->db_table[1] ."
+            ON roles.IdRole = utilisateur.IdRole
         WHERE 
         IdUtilisateur = ?
         LIMIT 0,1";
@@ -105,6 +96,66 @@
 
         }
 
-    
+        public function getSingleUtilisateur(){
+           
+            $dataRow = $this->VerifUser();
+            $this->Nom = $dataRow['Nom'];
+            $this->Prenom  = $dataRow['Prenom'];
+            $this->Mail = $dataRow['Mail'];
+            $this->Statut = $dataRow['Statut'];
+            $this->RoleNom = $dataRow['RoleNom'];
+           
+        }
+        
+        // UPDATE
+        public function updateUtilisateur(){
+            $sqlQuery = "UPDATE
+                        ". $this->db_table[0] ."
+                    SET
+                        Nom = :Nom, 
+                        Prenom  = :Prenom, 
+                        Mail = :Mail, 
+                        MotDePasse = :MotDePasse
+                        
+                    WHERE 
+                        IdUtilisateur = :IdUtilisateur";
+        
+            $stmt = $this->conn->prepare($sqlQuery);
+        
+            
+            $this->Nom=htmlspecialchars(strip_tags($this->Nom));
+            $this->Prenom=htmlspecialchars(strip_tags($this->Prenom));
+            $this->Mail=htmlspecialchars(strip_tags($this->Mail));
+            $this->MotDePasse=htmlspecialchars(strip_tags($this->MotDePasse));
+            $this->IdUtilisateur=htmlspecialchars(strip_tags($this->IdUtilisateur));
+        
+            // bind data
+            $stmt->bindParam(":Nom", $this->Nom);
+            $stmt->bindParam(":Prenom", $this->Prenom);
+            $stmt->bindParam(":Mail", $this->Mail);
+            $stmt->bindParam(":MotDePasse", $this->MotDePasse);
+            $stmt->bindParam(":IdUtilisateur", $this->IdUtilisateur);
+        
+            if($stmt->execute()){
+                return true;
+            }
+            return false;
+        }  
+        
+        // DELETE
+        function deleteUtilisateur(){
+            $sqlQuery = "DELETE FROM " . $this->db_table[0] . " WHERE IdUtilisateur = ?";
+            $stmt = $this->conn->prepare($sqlQuery);
+        
+            $this->IdUtilisateur=htmlspecialchars(strip_tags($this->IdUtilisateur));
+        
+            $stmt->bindParam(1, $this->IdUtilisateur);
+            echo "okkkkkkkkkkk";
+            echo "IdUtilisateur $this->IdUtilisateur";
+            if($stmt->execute()){
+                return true;
+            }
+            return false;
+        }
 
     }
