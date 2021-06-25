@@ -13,15 +13,15 @@
 
     $item = new Constructeur($db);
 
-    $item->NumVol = isset($_GET['IdConstructeur']) ? $_GET['IdConstructeur'] : die();
+    $item->IdConstructeur = isset($_GET['IdConstructeur']) ? $_GET['IdConstructeur'] : die();
   
     $item->getSingleConstructeur();
 
-    if($item->TypeAvion != null){
+    if($item->IdConstructeur != null){
         // create array
-        $vol = array(
+        $constructeur = array(
             "IdConstructeur" => $item->IdConstructeur,
-            "NomConstructeur" => $item->NomConstructeur,
+            "NomConstructeur" => $item->NomConstructeur
             
         );
 

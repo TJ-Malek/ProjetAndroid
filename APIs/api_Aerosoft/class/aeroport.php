@@ -52,10 +52,39 @@
             }
             return false;
         }
+        //IdAeroport, 
+        public function VerifAeroport(){
+            $sqlQuery = "SELECT
+                         
+            
+            NomAeroport, 
+            NomVilleDesservie
+                      
+          FROM
+            ". $this->db_table ."
+        WHERE 
+           IdAeroport = ?
+        LIMIT 0,1";
 
+        $stmt = $this->conn->prepare($sqlQuery);
+
+        $stmt->bindParam(1, $this->IdAeroport);
+
+        $stmt->execute();
+
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $data; 
+        }
         // GET SINGLE
         public function getSingleAeroport(){
-            $sqlQuery = "SELECT
+
+            $dataRow = $this->VerifAeroport();
+            //$this->IdAeroport = $dataRow['IdAeroport'];
+            $this->NomAeroport = $dataRow['NomAeroport'];
+            $this->NomVilleDesservie = $dataRow['NomVilleDesservie']; 
+
+
+        /*    $sqlQuery = "SELECT
                         IdAeroport, 
                         NomAeroport, 
                         NomVilleDesservie, 
@@ -75,7 +104,7 @@
             
             $this->IdAeroport = $dataRow['IdAeroport'];
             $this->NomAeroport = $dataRow['NomAeroport'];
-            $this->NomVilleDesservie = $dataRow['NomVilleDesservie'];
+            $this->NomVilleDesservie = $dataRow['NomVilleDesservie'];    */
            
         }        
 
@@ -107,6 +136,9 @@
             return false;
         }
 
+        
+
+       
         // DELETE
         function deleteAeroport(){
             $sqlQuery = "DELETE FROM " . $this->db_table . " WHERE IdAeroport = ?";
@@ -120,31 +152,6 @@
                 return true;
             }
             return false;
-        }
-
-        public function VerifAeroport(){
-            $sqlQuery = "SELECT
-                         
-            IdAeroport, 
-            NomAeroport, 
-            NomVilleDesservie
-             
-         
-          FROM
-            ". $this->db_table ."
-        WHERE 
-           IdAeroport = ?
-        LIMIT 0,1";
-
-        $stmt = $this->conn->prepare($sqlQuery);
-
-        $stmt->bindParam(1, $this->IdAeroport);
-
-        $stmt->execute();
-
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $data; 
-
         }
         
 
