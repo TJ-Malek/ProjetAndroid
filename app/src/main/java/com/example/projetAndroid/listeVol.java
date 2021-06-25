@@ -32,7 +32,7 @@ public class listeVol extends AppCompatActivity {
 
     List<Vol> Vol;
     //private static String API_URL="http://api.androidhive.info/Vol/";
-    private static String API_URL="http://10.75.25.250:8080/api_Aerosoft/api/crudVol/read.php";
+    private static String API_URL="http://192.168.1.137:80/api_Aerosoft/api/crudVol/read.php";
 
    // Adapter adapter;
 
