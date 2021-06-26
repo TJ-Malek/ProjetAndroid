@@ -1,6 +1,8 @@
 package com.example.projetAndroid;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,7 +31,7 @@ import java.util.List;
 public class listeVol extends AppCompatActivity {
 
     ListView listView;
-
+    SharedPreferences  sharedpreferences;
     List<Vol> Vol;
     //private static String API_URL="http://api.androidhive.info/Vol/";
     private static String API_URL="http://192.168.1.137:80/api_Aerosoft/api/crudVol/read.php";
@@ -97,7 +99,17 @@ public class listeVol extends AppCompatActivity {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     Log.i("message", "test.");
+
                                     Vol vol =  Vol.get(position);
+                                    //session exemple
+                                    sharedpreferences = getSharedPreferences("Session", Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedpreferences.edit();
+
+
+                                    editor.putString("numero Vol", vol.getNumVol());
+
+                                    editor.commit();
+                                    //
                                     Intent i = new Intent(listeVol.this, EditVol.class);
                                     i.putExtra("NumVol", vol.getNumVol());
 

@@ -1,5 +1,7 @@
 package com.example.projetAndroid;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -66,6 +68,12 @@ public class EditVol extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_vol);
+        //session exemple
+        SharedPreferences sharedpreferences = getSharedPreferences("Session", Context.MODE_PRIVATE);
+        String sessionNumVol = sharedpreferences.getString("numero Vol","notFoud");
+        Toast toast=Toast.makeText(getApplicationContext(),"NumVol = "+sessionNumVol,Toast.LENGTH_SHORT);
+        toast.show();
+        //
         Intent i = getIntent();
         String NumVol = i.getStringExtra("NumVol").toString();
 
