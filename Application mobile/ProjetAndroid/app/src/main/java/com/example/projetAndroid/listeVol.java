@@ -1,6 +1,8 @@
 package com.example.projetAndroid;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,10 +19,14 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -28,6 +34,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -177,7 +184,70 @@ public class listeVol extends AppCompatActivity {
 
         }
         else if(item.getItemId()==MENU_ITEM_DELETE){
-            Toast.makeText(getApplicationContext(),"delete",Toast.LENGTH_LONG).show();
+            new AlertDialog.Builder(this)
+                    .setMessage("Êtes vous sur de vouloir supprimer le vol " +selectedVol.getNumVol()+" ?")
+                    .setCancelable(false)
+                    .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            try {
+                                RequestQueue requestQueue = Volley.newRequestQueue(listeVol.this);
+                                String URL = "http://192.168.1.137:80/api_Aerosoft/api/crudVol/delete.php";
+                                JSONObject jsonBody = new JSONObject();
+                                String NumVol = String.valueOf(selectedVol.getNumVol());
+
+                                jsonBody.put("NumVol", NumVol);
+
+                                final String requestBody = jsonBody.toString();
+
+                                StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        Log.i("VOLLEY", response);
+                                        Toast toast = Toast.makeText(getApplicationContext(), "Succès : Le vol a été supprimé.", Toast.LENGTH_SHORT);
+
+                                        toast.show();
+                                        recreate();
+                                    }
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Log.e("VOLLEY", error.toString());
+                                    }
+                                }) {
+                                    @Override
+                                    public String getBodyContentType() {
+                                        return "application/json; charset=utf-8";
+                                    }
+
+                                    @Override
+                                    public byte[] getBody() throws AuthFailureError {
+                                        try {
+                                            return requestBody == null ? null : requestBody.getBytes("utf-8");
+                                        } catch (UnsupportedEncodingException uee) {
+                                            VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                                            return null;
+                                        }
+                                    }
+
+                                    @Override
+                                    protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                                        String responseString = "";
+                                        if (response != null) {
+                                            responseString = String.valueOf(response.statusCode);
+                                            // can get more details such as response.headers
+                                        }
+                                        return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
+                                    }
+                                };
+
+                                requestQueue.add(stringRequest);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    })
+                    .setNegativeButton("Non", null)
+                    .show();
         }else{
             return false;
         }

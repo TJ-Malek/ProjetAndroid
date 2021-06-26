@@ -127,7 +127,7 @@ public class EditVol extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     // url to post our data
-                    String url = "http://192.168.1.137:80/api_Aerosoft/api/crudVol/update.php";
+
                     try {
                         RequestQueue requestQueue = Volley.newRequestQueue(EditVol.this);
                         String URL = "http://192.168.1.137:80/api_Aerosoft/api/crudVol/update.php";
