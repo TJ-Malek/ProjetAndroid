@@ -11,7 +11,9 @@
         android:text="NumVol : "
         tools:layout_editor_absoluteX="19dp"
         tools:layout_editor_absoluteY="40dp"
-        android:layout_marginTop="18dp"/>
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="10dp"
+        />
 
 
     <TextView
@@ -30,6 +32,7 @@
         android:text="AeroportDept : "
         tools:layout_editor_absoluteX="19dp"
         tools:layout_editor_absoluteY="40dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="18dp"
         android:layout_below="@+id/NumVol"/>
 
@@ -44,5 +47,78 @@
         android:layout_toRightOf="@+id/AeroportDept"
         android:layout_below="@+id/NumVol"/>
 
+    <TextView
+        android:id="@+id/HDepart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HDepart : "
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/AeroportDept"/>
 
+    <EditText
+        android:id="@+id/HDepartBD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="113dp"
+        tools:layout_editor_absoluteY="76dp"
+        android:layout_toRightOf="@+id/AeroportDept"
+        android:layout_below="@+id/AeroportDeptBD"/>
+    <TextView
+        android:id="@+id/AeroportArr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="AeroportArr : "
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/HDepart"/>
+
+    <EditText
+        android:id="@+id/AeroportArrBD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="113dp"
+        tools:layout_editor_absoluteY="76dp"
+        android:layout_toRightOf="@+id/AeroportDept"
+        android:layout_below="@+id/HDepartBD"/>
+
+    <TextView
+        android:id="@+id/HArrivee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/AeroportArr"
+        android:layout_marginTop="41dp"
+        android:layout_marginLeft="10dp"
+        android:text="HArrivee : "
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="40dp" />
+
+    <EditText
+        android:id="@+id/HArriveeBD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/AeroportArrBD"
+        android:layout_marginLeft="31dp"
+        android:layout_marginTop="4dp"
+        android:layout_toRightOf="@+id/HArrivee"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="113dp"
+        tools:layout_editor_absoluteY="76dp" />
+
+    <Button
+        android:id="@+id/Modifier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/HArriveeBD"
+        android:layout_marginTop="8dp"
+        android:text="Modifier" />
 </RelativeLayout>

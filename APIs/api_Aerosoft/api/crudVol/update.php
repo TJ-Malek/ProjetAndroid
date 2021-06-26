@@ -25,8 +25,15 @@
     $item->HArrivee = $data->HArrivee;
     
     if($item->updateVol()){
-        echo json_encode("Succès : Le vol a été modifié.");
+        $res = array(
+            "res" => "ok"
+        );
+echo json_encode($res);
     } else{
-        echo json_encode("Erreur : Le vol n'a pas été modifié.");
+        $res = array(
+            "res" => "Erreur : Le vol n'a pas été modifié."
+        );
+echo json_encode($res);
+       // echo json_encode("Erreur : Le vol n'a pas été modifié.");
     }
 ?>
