@@ -3,6 +3,7 @@ package com.example.projetAndroid;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +68,7 @@ public class EditVol extends AppCompatActivity {
     String API_URL;
     TextView NumVolBD;
     EditText AeroportDeptBD,HDepartBD,AeroportArrBD,HArriveeBD;
-    Button Modifier;
+    Button Modifier,Retour;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +91,16 @@ public class EditVol extends AppCompatActivity {
         HDepartBD = (EditText) findViewById(R.id.HDepartBD);
         AeroportArrBD = (EditText) findViewById(R.id.AeroportArrBD);
         HArriveeBD = (EditText) findViewById(R.id.HArriveeBD);
+        Retour = (Button) findViewById(R.id.Retour);
+        Retour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(EditVol.this,listeVol.class);
 
+
+                startActivity(i);
+            }
+        });
 
         extractVol();
         if (!sessionNumVol.equals("not Found")) {
@@ -103,11 +113,24 @@ public class EditVol extends AppCompatActivity {
 
             RelativeLayout.LayoutParams editLayoutP = new RelativeLayout.LayoutParams(300, 150);
             editLayoutP.addRule(RelativeLayout.BELOW, R.id.HArriveeBD);
+            editLayoutP.addRule(RelativeLayout.RIGHT_OF, R.id.Retour);
             editLayoutP.setMargins(50, 50, 50, 50);
             Modifier.setPadding(20, 20, 20, 20);
-            Modifier.setBackgroundResource(R.color.purple_500);
+            //border
+            GradientDrawable shape = new GradientDrawable();
+            shape.setShape(GradientDrawable.RECTANGLE);
+            shape.setCornerRadius(10);
+            shape.setColor(Color.rgb(98, 0, 238));
+            Modifier.setBackground(shape);
+            //
+           //Modifier.setBackgroundResource(R.color.purple_500);
             Modifier.setTextSize(18);
+
             Modifier.setTextColor(Color.WHITE);
+
+
+
+
             editLayout.addView(Modifier, editLayoutP);
             // editLayout.setPadding(80, 50, 50, 50);
 

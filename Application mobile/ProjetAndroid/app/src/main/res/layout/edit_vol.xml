@@ -115,11 +115,15 @@
         tools:layout_editor_absoluteX="113dp"
         tools:layout_editor_absoluteY="76dp" />
 
-    <!--<Button
-        android:id="@+id/Modifier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/Retour"
+        android:layout_width="300px"
+        android:layout_height="180px"
         android:layout_below="@+id/HArriveeBD"
-        android:layout_marginTop="8dp"
-        android:text="Modifier" />-->
+        android:layout_marginTop="40px"
+        android:layout_marginLeft="10px"
+        android:text="Retour"
+        android:textSize="18dp"
+        android:padding="20px"
+        />
 </RelativeLayout>

@@ -185,7 +185,7 @@ public class listeVol extends AppCompatActivity {
         }
         else if(item.getItemId()==MENU_ITEM_DELETE){
             new AlertDialog.Builder(this)
-                    .setMessage("Êtes vous sur de vouloir supprimer le vol " +selectedVol.getNumVol()+" ?")
+                    .setMessage("Êtes-vous sûr de vouloir supprimer le vol " +selectedVol.getNumVol()+" ?")
                     .setCancelable(false)
                     .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
