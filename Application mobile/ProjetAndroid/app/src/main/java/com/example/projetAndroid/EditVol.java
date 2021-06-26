@@ -2,11 +2,15 @@ package com.example.projetAndroid;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,15 +74,15 @@ public class EditVol extends AppCompatActivity {
         setContentView(R.layout.edit_vol);
         //session exemple
         SharedPreferences sharedpreferences = getSharedPreferences("Session", Context.MODE_PRIVATE);
-        String sessionNumVol = sharedpreferences.getString("numero Vol","notFoud");
-        Toast toast=Toast.makeText(getApplicationContext(),"NumVol = "+sessionNumVol,Toast.LENGTH_SHORT);
+        String sessionNumVol = sharedpreferences.getString("numero Vol", "not Found");
+        Toast toast = Toast.makeText(getApplicationContext(), "NumVol = " + sessionNumVol, Toast.LENGTH_SHORT);
         toast.show();
         //
         Intent i = getIntent();
-        String NumVol = i.getStringExtra("NumVol").toString();
+        String NumVol = i.getStringExtra("NumVol");
 
 
-        API_URL = "http://192.168.1.137:80/api_Aerosoft/api/crudVol/single_read.php?NumVol="+NumVol;
+        API_URL = "http://192.168.1.137:80/api_Aerosoft/api/crudVol/single_read.php?NumVol=" + NumVol;
         Log.i("message : url = ", API_URL);
 
         NumVolBD = (TextView) findViewById(R.id.NumVolBD);
@@ -86,75 +90,107 @@ public class EditVol extends AppCompatActivity {
         HDepartBD = (EditText) findViewById(R.id.HDepartBD);
         AeroportArrBD = (EditText) findViewById(R.id.AeroportArrBD);
         HArriveeBD = (EditText) findViewById(R.id.HArriveeBD);
-        Modifier = (Button) findViewById(R.id.Modifier);
+
+
         extractVol();
-        Modifier.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // url to post our data
-                String url = "http://192.168.1.137:80/api_Aerosoft/api/crudVol/update.php";
-                try {
-                    RequestQueue requestQueue = Volley.newRequestQueue(EditVol.this);
-                    String URL = "http://192.168.1.137:80/api_Aerosoft/api/crudVol/update.php";
-                    JSONObject jsonBody = new JSONObject();
-                    String NumVol = String.valueOf(NumVolBD.getText());
-                    String AeroportDept =  String.valueOf(AeroportDeptBD.getText());
-                    String HDepart =  String.valueOf(HDepartBD.getText());/*+":00"*/
-                    String AeroportArr = String.valueOf(AeroportArrBD.getText());
-                    String HArrivee = String.valueOf(HArriveeBD.getText());/*+":00"*/
-                    jsonBody.put("NumVol", NumVol);
-                    jsonBody.put("AeroportDept",AeroportDept);
-                    jsonBody.put("HDepart",HDepart);
-                    jsonBody.put("AeroportArr",AeroportArr );
-                    jsonBody.put("HArrivee", HArrivee);
-                    final String requestBody = jsonBody.toString();
+        if (!sessionNumVol.equals("not Found")) {
+            // Modifier = (Button) findViewById(R.id.Modifier);
+            Modifier = new Button(this);
+            Modifier.setText("Modifier");
 
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            Log.i("VOLLEY", response);
-                            Toast toast=Toast.makeText(getApplicationContext(),"Succès : Le vol a été modifié.",Toast.LENGTH_SHORT);
+            //Modifier.setid
+            RelativeLayout editLayout = (RelativeLayout) findViewById(R.id.editLayout);
 
-                            toast.show();
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.e("VOLLEY", error.toString());
-                        }
-                    }) {
-                        @Override
-                        public String getBodyContentType() {
-                            return "application/json; charset=utf-8";
-                        }
+            RelativeLayout.LayoutParams editLayoutP = new RelativeLayout.LayoutParams(300, 150);
+            editLayoutP.addRule(RelativeLayout.BELOW, R.id.HArriveeBD);
+            editLayoutP.setMargins(50, 50, 50, 50);
+            Modifier.setPadding(20, 20, 20, 20);
+            Modifier.setBackgroundResource(R.color.purple_500);
+            Modifier.setTextSize(18);
+            Modifier.setTextColor(Color.WHITE);
+            editLayout.addView(Modifier, editLayoutP);
+            // editLayout.setPadding(80, 50, 50, 50);
 
-                        @Override
-                        public byte[] getBody() throws AuthFailureError {
-                            try {
-                                return requestBody == null ? null : requestBody.getBytes("utf-8");
-                            } catch (UnsupportedEncodingException uee) {
-                                VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
-                                return null;
+       /* ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) editLayout.getLayoutParams();
+        params.width = 200; params.leftMargin = 100; params.topMargin = 200;
+        Modifier.setLayoutParams(params);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT,
+                RelativeLayout.LayoutParams.WRAP_CONTENT
+        );
+        params.setMargins(30, 10, 10, 10);
+        Modifier.setLayoutParams(params);*/
+
+            //Modifier.setTextColor(R.color.purple_500);
+            //Modifier.setWidth(100);
+            Modifier.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // url to post our data
+                    String url = "http://192.168.1.137:80/api_Aerosoft/api/crudVol/update.php";
+                    try {
+                        RequestQueue requestQueue = Volley.newRequestQueue(EditVol.this);
+                        String URL = "http://192.168.1.137:80/api_Aerosoft/api/crudVol/update.php";
+                        JSONObject jsonBody = new JSONObject();
+                        String NumVol = String.valueOf(NumVolBD.getText());
+                        String AeroportDept = String.valueOf(AeroportDeptBD.getText());
+                        String HDepart = String.valueOf(HDepartBD.getText());/*+":00"*/
+                        String AeroportArr = String.valueOf(AeroportArrBD.getText());
+                        String HArrivee = String.valueOf(HArriveeBD.getText());/*+":00"*/
+                        jsonBody.put("NumVol", NumVol);
+                        jsonBody.put("AeroportDept", AeroportDept);
+                        jsonBody.put("HDepart", HDepart);
+                        jsonBody.put("AeroportArr", AeroportArr);
+                        jsonBody.put("HArrivee", HArrivee);
+                        final String requestBody = jsonBody.toString();
+
+                        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Log.i("VOLLEY", response);
+                                Toast toast = Toast.makeText(getApplicationContext(), "Succès : Le vol a été modifié.", Toast.LENGTH_SHORT);
+
+                                toast.show();
                             }
-                        }
-
-                        @Override
-                        protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                            String responseString = "";
-                            if (response != null) {
-                                responseString = String.valueOf(response.statusCode);
-                                // can get more details such as response.headers
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.e("VOLLEY", error.toString());
                             }
-                            return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
-                        }
-                    };
+                        }) {
+                            @Override
+                            public String getBodyContentType() {
+                                return "application/json; charset=utf-8";
+                            }
 
-                    requestQueue.add(stringRequest);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                            @Override
+                            public byte[] getBody() throws AuthFailureError {
+                                try {
+                                    return requestBody == null ? null : requestBody.getBytes("utf-8");
+                                } catch (UnsupportedEncodingException uee) {
+                                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                                    return null;
+                                }
+                            }
+
+                            @Override
+                            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                                String responseString = "";
+                                if (response != null) {
+                                    responseString = String.valueOf(response.statusCode);
+                                    // can get more details such as response.headers
+                                }
+                                return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
+                            }
+                        };
+
+                        requestQueue.add(stringRequest);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
+            });
         }
-    });
     }
    /* private Map<String, String> checkjsonBody(Map<String, String> map){
         Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();

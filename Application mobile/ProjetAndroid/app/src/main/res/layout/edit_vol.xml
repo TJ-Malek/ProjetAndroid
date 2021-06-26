@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/editLayout">
 
     <TextView
         android:id="@+id/NumVol"
@@ -114,11 +115,11 @@
         tools:layout_editor_absoluteX="113dp"
         tools:layout_editor_absoluteY="76dp" />
 
-    <Button
+    <!--<Button
         android:id="@+id/Modifier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/HArriveeBD"
         android:layout_marginTop="8dp"
-        android:text="Modifier" />
+        android:text="Modifier" />-->
 </RelativeLayout>
