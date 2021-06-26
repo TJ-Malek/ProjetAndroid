@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -35,7 +38,8 @@ public class listeVol extends AppCompatActivity {
     List<Vol> Vol;
     //private static String API_URL="http://api.androidhive.info/Vol/";
     private static String API_URL="http://192.168.1.137:80/api_Aerosoft/api/crudVol/read.php";
-
+    private static final int MENU_ITEM_EDIT = 111;
+    private static final int MENU_ITEM_DELETE = 222;
    // Adapter adapter;
 
 
@@ -53,7 +57,7 @@ public class listeVol extends AppCompatActivity {
 
         extractVol();
 
-
+        registerForContextMenu(listView);
     }
 
     private void extractVol() {
@@ -95,7 +99,7 @@ public class listeVol extends AppCompatActivity {
                             /*adapter.notifyDataSetChanged();
                             listView.invalidateViews();*/
                             listView.setAdapter(adapter);
-                            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                           /* listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                     Log.i("message", "test.");
@@ -116,7 +120,7 @@ public class listeVol extends AppCompatActivity {
                                     startActivity(i);
 
                                 } });
-
+*/
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -136,5 +140,47 @@ public class listeVol extends AppCompatActivity {
         //adding the string request to request queue
         requestQueue.add(stringRequest);
 
+    }
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+
+        menu.setHeaderTitle("Select The Action");
+        menu.setHeaderTitle("Menu de sélection");
+
+        menu.add(0, MENU_ITEM_EDIT , 0, "Modifier");
+        menu.add(0, MENU_ITEM_DELETE, 1, "Supprimer");
+    }
+    @Override
+    public boolean onContextItemSelected(MenuItem item){
+        AdapterView.AdapterContextMenuInfo
+                info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        final Vol selectedVol = (Vol) this.listView.getItemAtPosition(info.position);
+        if(item.getItemId()==MENU_ITEM_EDIT){
+            //session exemple
+            sharedpreferences = getSharedPreferences("Session", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedpreferences.edit();
+
+
+            editor.putString("numero Vol", selectedVol.getNumVol());
+
+            editor.commit();
+            //
+            Intent i = new Intent(listeVol.this, EditVol.class);
+            i.putExtra("NumVol", selectedVol.getNumVol());
+
+            startActivity(i);
+
+
+        }
+        else if(item.getItemId()==MENU_ITEM_DELETE){
+            Toast.makeText(getApplicationContext(),"delete",Toast.LENGTH_LONG).show();
+        }else{
+            return false;
+        }
+        return true;
     }
 }
