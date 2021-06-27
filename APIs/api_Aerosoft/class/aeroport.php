@@ -136,8 +136,6 @@
             return false;
         }
 
-        
-
        
         // DELETE
         function deleteAeroport(){
