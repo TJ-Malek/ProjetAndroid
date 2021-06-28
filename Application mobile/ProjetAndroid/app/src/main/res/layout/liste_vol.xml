@@ -7,18 +7,25 @@
     tools:context=".listeVol">
     <TextView
         android:id="@+id/Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
 
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginLeft="3dp"
 
-        android:gravity="center_vertical"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="3dp"
+
+        android:layout_marginBottom="10dp"
+        android:background="#306969"
+        android:gravity="center"
+
+        android:lines="2"
         android:text="Vols"
         android:textSize="30dp"
-        android:textStyle="bold"
-        android:layout_marginBottom="10dp"/>
-            <TextView
+        android:textStyle="bold" />
+
+    <TextView
                 android:id="@+id/NumVolTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

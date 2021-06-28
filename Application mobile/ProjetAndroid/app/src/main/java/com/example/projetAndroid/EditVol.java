@@ -96,7 +96,7 @@ public class EditVol extends AppCompatActivity  implements AdapterView.OnItemSel
         String NumVol = i.getStringExtra("NumVol");
 
 
-        API_URL = "http://10.75.25.250:8080/api_Aerosoft/api/crudVol/single_read.php?NumVol=" + NumVol;
+        API_URL = "http://10.75.25.176:8080/api_Aerosoft/api/crudVol/single_read.php?NumVol=" + NumVol;
         Log.i("message : url = ", API_URL);
 
         NumVolBD = (TextView) findViewById(R.id.NumVolBD);
@@ -172,7 +172,7 @@ public class EditVol extends AppCompatActivity  implements AdapterView.OnItemSel
         try {
             // Requette POST
             RequestQueue requestQueue = Volley.newRequestQueue(EditVol.this);
-            String URL = "http://10.75.25.250:8080/api_Aerosoft/api/crudVol/update.php";
+            String URL = "http://10.75.25.176:8080/api_Aerosoft/api/crudVol/update.php";
             // Données à envoiyées
             JSONObject jsonBody = new JSONObject();
             String NumVol = String.valueOf(NumVolBD.getText());
@@ -309,7 +309,7 @@ public class EditVol extends AppCompatActivity  implements AdapterView.OnItemSel
     private void extractAeroports() {
 
         // Requette GET
-        String URL = "http://10.75.25.250:8080/api_Aerosoft/api/crudAeroport/read.php";
+        String URL = "http://10.75.25.176:8080/api_Aerosoft/api/crudAeroport/read.php";
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
                 new Response.Listener<String>() {
                     @Override

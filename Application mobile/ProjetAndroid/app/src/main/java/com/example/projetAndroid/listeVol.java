@@ -44,7 +44,7 @@ public class listeVol extends AppCompatActivity {
     SharedPreferences  sharedpreferences;
     List<Vol> Vol;
 
-    private static String API_URL="http://10.75.25.250:8080/api_Aerosoft/api/crudVol/read.php";
+    private static String API_URL="http://10.75.25.176:8080/api_Aerosoft/api/crudVol/read.php";
     private static final int MENU_ITEM_EDIT = 111;
     private static final int MENU_ITEM_DELETE = 222;
    // Adapter adapter;
@@ -202,7 +202,7 @@ public class listeVol extends AppCompatActivity {
         // Requette POST
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(listeVol.this);
-            String URL = "http://10.75.25.250:8080/api_Aerosoft/api/crudVol/delete.php";
+            String URL = "http://10.75.25.176:8080/api_Aerosoft/api/crudVol/delete.php";
             JSONObject jsonBody = new JSONObject();
             String NumVol = String.valueOf(selectedVol.getNumVol());
 
