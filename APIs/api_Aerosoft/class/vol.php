@@ -89,7 +89,6 @@
 
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         return $data; 
-
         }
         // getSingle
         public function getSingleVol(){

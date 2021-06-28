@@ -13,17 +13,16 @@
 
     $item = new Aeroport($db);
 
-    $item->NumVol = isset($_GET['IdAeroport']) ? $_GET['IdAeroport'] : die();
+    $item->IdAeroport = isset($_GET['IdAeroport']) ? $_GET['IdAeroport'] : die();
   
     $item->getSingleAeroport();
 
     if($item->NomAeroport != null){
         // create array
-        $vol = array(
+        $aeroport = array(
             "IdAeroport" => $item->IdAeroport,
             "NomAeroport" => $item->NomAeroport,
-            "NomVilleDesservie" => $item->NomVilleDesservie,
-            
+            "NomVilleDesservie" => $item->NomVilleDesservie         
         );
 
         http_response_code(200);
