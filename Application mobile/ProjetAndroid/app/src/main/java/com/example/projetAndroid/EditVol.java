@@ -7,11 +7,13 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -64,11 +68,15 @@ import org.json.JSONException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditVol extends AppCompatActivity {
+public class EditVol extends AppCompatActivity  implements AdapterView.OnItemSelectedListener {
     String API_URL;
     TextView NumVolBD;
-    EditText AeroportDeptBD,HDepartBD,AeroportArrBD,HArriveeBD;
-    Button Modifier,Retour;
+    EditText HDepartBD, HArriveeBD;
+    Spinner AeroportArrBD, AeroportDeptBD;
+    Button Modifier, Retour;
+    //String[] aeroprtsArray;
+    ArrayList<String> aeroprtsArray = new ArrayList<String>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,9 +100,9 @@ public class EditVol extends AppCompatActivity {
         Log.i("message : url = ", API_URL);
 
         NumVolBD = (TextView) findViewById(R.id.NumVolBD);
-        AeroportDeptBD = (EditText) findViewById(R.id.AeroportDeptBD);
+        AeroportDeptBD = (Spinner) findViewById(R.id.AeroportDeptBD);
         HDepartBD = (EditText) findViewById(R.id.HDepartBD);
-        AeroportArrBD = (EditText) findViewById(R.id.AeroportArrBD);
+        AeroportArrBD = (Spinner) findViewById(R.id.AeroportArrBD);
         HArriveeBD = (EditText) findViewById(R.id.HArriveeBD);
         Retour = (Button) findViewById(R.id.Retour);
 
@@ -102,15 +110,16 @@ public class EditVol extends AppCompatActivity {
         Retour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(EditVol.this,listeVol.class);
+                Intent i = new Intent(EditVol.this, listeVol.class);
 
 
                 startActivity(i);
             }
         });
 
+        extractAeroports();
         // Get Vol
-        extractVol();
+       // extractVol();
 
         // Bouton Modifier crée sous condition ( gestion des roles)
         if (!sessionNumVol.equals("not Found")) {
@@ -159,7 +168,7 @@ public class EditVol extends AppCompatActivity {
         }
     }
 
-    private void UpdateVol(){
+    private void UpdateVol() {
         try {
             // Requette POST
             RequestQueue requestQueue = Volley.newRequestQueue(EditVol.this);
@@ -167,10 +176,11 @@ public class EditVol extends AppCompatActivity {
             // Données à envoiyées
             JSONObject jsonBody = new JSONObject();
             String NumVol = String.valueOf(NumVolBD.getText());
-            String AeroportDept = String.valueOf(AeroportDeptBD.getText());
-            String HDepart = String.valueOf(HDepartBD.getText()+":00");
-            String AeroportArr = String.valueOf(AeroportArrBD.getText());
-            String HArrivee = String.valueOf(HArriveeBD.getText()+":00");
+            String AeroportDept = String.valueOf(AeroportDeptBD.getSelectedItem());
+            String HDepart = String.valueOf(HDepartBD.getText() + ":00");
+            String AeroportArr = String.valueOf(AeroportArrBD.getSelectedItem());
+            String HArrivee = String.valueOf(HArriveeBD.getText() + ":00");
+            Log.i("*******************dept selected = ",String.valueOf(AeroportDeptBD.getSelectedItem()));
             jsonBody.put("NumVol", NumVol);
             jsonBody.put("AeroportDept", AeroportDept);
             jsonBody.put("HDepart", HDepart);
@@ -226,8 +236,11 @@ public class EditVol extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     private void extractVol() {
 
+        // GET Aeroports
+        //extractAeroports();
         // Requette GET
         StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL,
                 new Response.Listener<String>() {
@@ -235,15 +248,26 @@ public class EditVol extends AppCompatActivity {
                     public void onResponse(String response) {
 
                         try {
+
+
+
+
                             // Le Vol récupéré
                             JSONObject obj = new JSONObject(response);
                             // Affichage du vol
                             NumVolBD.setText(obj.getString("NumVol"));
-                            AeroportDeptBD.setText(obj.getString("AeroportDept"));
+                            Log.i("aeroprtsArray val 5 = ",aeroprtsArray.get(5));
+
+                            Log.i("AeroportDeptBD val 5 = "," "+AeroportDeptBD.getItemAtPosition(5));
+                            AeroportDeptBD.setSelection(aeroprtsArray.indexOf(obj.getString("AeroportDept")));
+                            Log.i("*************selectionner = ","posiotion= " +aeroprtsArray.indexOf(obj.getString("AeroportDept")));
+                            Log.i("*************aeroprtsArray.get(0)= ","= " +aeroprtsArray.size());
+
+                            Log.i("*******************dept= ",String.valueOf(AeroportDeptBD.getSelectedItem()));
                             // substring(0,5) pour améliorer l'affichage des heures
-                            HDepartBD.setText(obj.getString("HDepart").substring(0,5));
-                            AeroportArrBD.setText(obj.getString("AeroportArr"));
-                            HArriveeBD.setText(obj.getString("HArrivee").substring(0,5));
+                            HDepartBD.setText(obj.getString("HDepart").substring(0, 5));
+                            AeroportArrBD.setSelection(aeroprtsArray.indexOf(obj.getString("AeroportArr")));
+                            HArriveeBD.setText(obj.getString("HArrivee").substring(0, 5));
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -258,6 +282,22 @@ public class EditVol extends AppCompatActivity {
 
                     }
                 });
+        ArrayAdapter ad
+                = new ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item,
+                aeroprtsArray);
+
+        // set simple layout resource file
+        // for each item of spinner
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+
+        // Set the ArrayAdapter (ad) data on the
+        // Spinner which binds data to spinner
+        AeroportDeptBD.setAdapter(ad);
+        AeroportArrBD.setAdapter(ad);
         //creating a request queue
         RequestQueue requestQueue = Volley.newRequestQueue(this);
 
@@ -265,4 +305,60 @@ public class EditVol extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
+
+    private void extractAeroports() {
+
+        // Requette GET
+        String URL = "http://10.75.25.250:8080/api_Aerosoft/api/crudAeroport/read.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            JSONObject obj = new JSONObject(response);
+
+                            JSONArray AeroportArray = obj.getJSONArray("aeroport");
+
+                            // Pour chaque vol dans l'array récupéré
+                            for (int i = 0; i < AeroportArray.length(); i++) {
+                                JSONObject aeroportObject = AeroportArray.getJSONObject(i);
+                                aeroprtsArray.add(aeroportObject.getString("IdAeroport"));
+                            }
+                            extractVol();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //displaying the error in toast if occurrs
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+        //creating a request queue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        //adding the string request to request queue
+        requestQueue.add(stringRequest);
+
+    }
+    @Override
+    public void onItemSelected(AdapterView adapter, View v, int i, long lng) {
+
+        if(v.hasFocus() ){
+            Toast.makeText(getApplicationContext(), (CharSequence) AeroportDeptBD.getSelectedItem(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }
+

@@ -37,16 +37,21 @@
         android:layout_marginTop="18dp"
         android:layout_below="@+id/NumVol"/>
 
-    <EditText
+    <Spinner
         android:id="@+id/AeroportDeptBD"
+
+        android:layout_below="@+id/NumVol"
+
+        android:layout_toRightOf="@+id/AeroportDept"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="113dp"
-        tools:layout_editor_absoluteY="76dp"
-        android:layout_toRightOf="@+id/AeroportDept"
-        android:layout_below="@+id/NumVol"/>
+
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="18dp"
+
+        />
 
     <TextView
         android:id="@+id/HDepart"
@@ -80,16 +85,19 @@
         android:layout_marginTop="18dp"
         android:layout_below="@+id/HDepart"/>
 
-    <EditText
+    <Spinner
         android:id="@+id/AeroportArrBD"
+
+        android:layout_below="@+id/HDepartBD"
+        
+        android:layout_toRightOf="@+id/AeroportDept"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="113dp"
-        tools:layout_editor_absoluteY="76dp"
-        android:layout_toRightOf="@+id/AeroportDept"
-        android:layout_below="@+id/HDepartBD"/>
+
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="18dp" />
 
     <TextView
         android:id="@+id/HArrivee"
