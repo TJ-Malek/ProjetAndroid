@@ -95,12 +95,16 @@
             $this->IdAeroport=htmlspecialchars(strip_tags($this->IdAeroport));
             $this->NomAeroport =htmlspecialchars(strip_tags($this->NomAeroport));
             $this->NomVilleDesservie=htmlspecialchars(strip_tags($this->NomVilleDesservie));
+           
+            $this->NumAvion=htmlspecialchars(strip_tags($this->NumAvion));
         
             // bind data
             $stmt->bindParam(":IdAeroport", $this->IdAeroport);
             $stmt->bindParam(":NomAeroport ", $this->NomAeroport );
             $stmt->bindParam(":NomVilleDesservie", $this->NomVilleDesservie);
             
+            $stmt->bindParam(":IdAeroport", $this->IdAeroport);
+        
             if($stmt->execute()){
                return true;
             }

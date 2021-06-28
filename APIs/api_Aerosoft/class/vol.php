@@ -57,7 +57,6 @@
             $stmt->bindParam(":AeroportArr", $this->AeroportArr);
             $stmt->bindParam(":HArrivee", $this->HArrivee);
            
-        
             if($stmt->execute()){
                return true;
             }
