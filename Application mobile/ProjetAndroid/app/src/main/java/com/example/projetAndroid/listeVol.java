@@ -43,8 +43,8 @@ public class listeVol extends AppCompatActivity {
     ListView listView;
     SharedPreferences  sharedpreferences;
     List<Vol> Vol;
-    //private static String API_URL="http://api.androidhive.info/Vol/";
-    private static String API_URL="http://192.168.1.137:80/api_Aerosoft/api/crudVol/read.php";
+
+    private static String API_URL="http://10.75.25.250:8080/api_Aerosoft/api/crudVol/read.php";
     private static final int MENU_ITEM_EDIT = 111;
     private static final int MENU_ITEM_DELETE = 222;
    // Adapter adapter;
@@ -56,14 +56,12 @@ public class listeVol extends AppCompatActivity {
         setContentView(R.layout.liste_vol);
         Log.i("message", "create.");
         listView = (ListView) findViewById(R.id.listView);
-       /*TextView textView = new TextView(context);
-        textView.setText("Hello. I'm a header view");
-
-        listView.addHeaderView(textView);*/
         Vol= new ArrayList<>();
 
+        // Affichage liste des vols
         extractVol();
 
+        // Enregistrement du menu contextuelle dans la vue listView
         registerForContextMenu(listView);
     }
 
@@ -73,6 +71,7 @@ public class listeVol extends AppCompatActivity {
         //making the progressbar visible
         progressBar.setVisibility(View.VISIBLE);
 
+        // Requette GET
         StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL,
                 new Response.Listener<String>() {
                     @Override
@@ -83,9 +82,12 @@ public class listeVol extends AppCompatActivity {
 
 
                         try {
+                            // Récupération du résultat
                             JSONObject obj = new JSONObject(response);
 
                             JSONArray volArray = obj.getJSONArray("vol");
+
+                            // Pour chaque vol dans l'array récupéré
                             for (int i = 0; i < volArray.length(); i++) {
                                 JSONObject volObject = volArray.getJSONObject(i);
 
@@ -102,32 +104,11 @@ public class listeVol extends AppCompatActivity {
                                 Vol.add(vol);
 
                             }
+                            // Ajouter les vol à listView
                             Adapter adapter = new Adapter(Vol, getApplicationContext());
-                            /*adapter.notifyDataSetChanged();
-                            listView.invalidateViews();*/
+
                             listView.setAdapter(adapter);
-                           /* listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    Log.i("message", "test.");
 
-                                    Vol vol =  Vol.get(position);
-                                    //session exemple
-                                    sharedpreferences = getSharedPreferences("Session", Context.MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = sharedpreferences.edit();
-
-
-                                    editor.putString("numero Vol", vol.getNumVol());
-
-                                    editor.commit();
-                                    //
-                                    Intent i = new Intent(listeVol.this, EditVol.class);
-                                    i.putExtra("NumVol", vol.getNumVol());
-
-                                    startActivity(i);
-
-                                } });
-*/
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -148,6 +129,8 @@ public class listeVol extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
+
+    // Création du menu contextuelle
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
     {
@@ -160,22 +143,34 @@ public class listeVol extends AppCompatActivity {
         menu.add(0, MENU_ITEM_EDIT , 0, "Modifier");
         menu.add(0, MENU_ITEM_DELETE, 1, "Supprimer");
     }
+    // Selection dans le menu contextuelle
     @Override
     public boolean onContextItemSelected(MenuItem item){
+        // position de l'élément vol selectionné
         AdapterView.AdapterContextMenuInfo
                 info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 
         final Vol selectedVol = (Vol) this.listView.getItemAtPosition(info.position);
+        //
+
+        // Modification
         if(item.getItemId()==MENU_ITEM_EDIT){
-            //session exemple
+            // Session exemple
+
+            // Nom de la session "Session"
             sharedpreferences = getSharedPreferences("Session", Context.MODE_PRIVATE);
+
+            // Editeur de session
             SharedPreferences.Editor editor = sharedpreferences.edit();
 
-
+            // Création de variable de session
+            // editor.putString("clé", valeur);
             editor.putString("numero Vol", selectedVol.getNumVol());
 
             editor.commit();
             //
+
+            // Redirection vers EditVol
             Intent i = new Intent(listeVol.this, EditVol.class);
             i.putExtra("NumVol", selectedVol.getNumVol());
 
@@ -183,67 +178,15 @@ public class listeVol extends AppCompatActivity {
 
 
         }
+
+        // Suppression
         else if(item.getItemId()==MENU_ITEM_DELETE){
             new AlertDialog.Builder(this)
                     .setMessage("Êtes-vous sûr de vouloir supprimer le vol " +selectedVol.getNumVol()+" ?")
                     .setCancelable(false)
                     .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            try {
-                                RequestQueue requestQueue = Volley.newRequestQueue(listeVol.this);
-                                String URL = "http://192.168.1.137:80/api_Aerosoft/api/crudVol/delete.php";
-                                JSONObject jsonBody = new JSONObject();
-                                String NumVol = String.valueOf(selectedVol.getNumVol());
-
-                                jsonBody.put("NumVol", NumVol);
-
-                                final String requestBody = jsonBody.toString();
-
-                                StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-                                    @Override
-                                    public void onResponse(String response) {
-                                        Log.i("VOLLEY", response);
-                                        Toast toast = Toast.makeText(getApplicationContext(), "Succès : Le vol a été supprimé.", Toast.LENGTH_SHORT);
-
-                                        toast.show();
-                                        recreate();
-                                    }
-                                }, new Response.ErrorListener() {
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        Log.e("VOLLEY", error.toString());
-                                    }
-                                }) {
-                                    @Override
-                                    public String getBodyContentType() {
-                                        return "application/json; charset=utf-8";
-                                    }
-
-                                    @Override
-                                    public byte[] getBody() throws AuthFailureError {
-                                        try {
-                                            return requestBody == null ? null : requestBody.getBytes("utf-8");
-                                        } catch (UnsupportedEncodingException uee) {
-                                            VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
-                                            return null;
-                                        }
-                                    }
-
-                                    @Override
-                                    protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                                        String responseString = "";
-                                        if (response != null) {
-                                            responseString = String.valueOf(response.statusCode);
-                                            // can get more details such as response.headers
-                                        }
-                                        return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
-                                    }
-                                };
-
-                                requestQueue.add(stringRequest);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                            DeleteVol(selectedVol);
                         }
                     })
                     .setNegativeButton("Non", null)
@@ -252,5 +195,74 @@ public class listeVol extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    private void DeleteVol(Vol selectedVol){
+
+        // Requette POST
+        try {
+            RequestQueue requestQueue = Volley.newRequestQueue(listeVol.this);
+            String URL = "http://10.75.25.250:8080/api_Aerosoft/api/crudVol/delete.php";
+            JSONObject jsonBody = new JSONObject();
+            String NumVol = String.valueOf(selectedVol.getNumVol());
+
+            // Données à envoyées
+            jsonBody.put("NumVol", NumVol);
+            //
+
+            final String requestBody = jsonBody.toString();
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+
+                // Succès
+                @Override
+                public void onResponse(String response) {
+                    Log.i("VOLLEY", response);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Succès : Le vol a été supprimé.", Toast.LENGTH_SHORT);
+
+                    toast.show();
+
+                    // Relancer l'activité
+                    recreate();
+
+                }
+                //
+
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("VOLLEY", error.toString());
+                }
+            }) {
+                @Override
+                public String getBodyContentType() {
+                    return "application/json; charset=utf-8";
+                }
+
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    try {
+                        return requestBody == null ? null : requestBody.getBytes("utf-8");
+                    } catch (UnsupportedEncodingException uee) {
+                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                        return null;
+                    }
+                }
+
+                @Override
+                protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                    String responseString = "";
+                    if (response != null) {
+                        responseString = String.valueOf(response.statusCode);
+                        // can get more details such as response.headers
+                    }
+                    return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
+                }
+            };
+
+            requestQueue.add(stringRequest);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

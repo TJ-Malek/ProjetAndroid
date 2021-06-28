@@ -73,8 +73,13 @@ public class EditVol extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_vol);
-        //session exemple
+        // Session exemple
+
+        // Récupération de la session "Session"
         SharedPreferences sharedpreferences = getSharedPreferences("Session", Context.MODE_PRIVATE);
+
+        // Récupération de la variable de session
+        // valeur "not Found" si aucune valeur n'a été récupérée
         String sessionNumVol = sharedpreferences.getString("numero Vol", "not Found");
         Toast toast = Toast.makeText(getApplicationContext(), "NumVol = " + sessionNumVol, Toast.LENGTH_SHORT);
         toast.show();
@@ -83,7 +88,7 @@ public class EditVol extends AppCompatActivity {
         String NumVol = i.getStringExtra("NumVol");
 
 
-        API_URL = "http://192.168.1.137:80/api_Aerosoft/api/crudVol/single_read.php?NumVol=" + NumVol;
+        API_URL = "http://10.75.25.250:8080/api_Aerosoft/api/crudVol/single_read.php?NumVol=" + NumVol;
         Log.i("message : url = ", API_URL);
 
         NumVolBD = (TextView) findViewById(R.id.NumVolBD);
@@ -92,6 +97,8 @@ public class EditVol extends AppCompatActivity {
         AeroportArrBD = (EditText) findViewById(R.id.AeroportArrBD);
         HArriveeBD = (EditText) findViewById(R.id.HArriveeBD);
         Retour = (Button) findViewById(R.id.Retour);
+
+        // Bouton Retour
         Retour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,153 +109,142 @@ public class EditVol extends AppCompatActivity {
             }
         });
 
+        // Get Vol
         extractVol();
+
+        // Bouton Modifier crée sous condition ( gestion des roles)
         if (!sessionNumVol.equals("not Found")) {
-            // Modifier = (Button) findViewById(R.id.Modifier);
+
+            // Création bouton Modifier
             Modifier = new Button(this);
             Modifier.setText("Modifier");
 
-            //Modifier.setid
+            // Layout dans lequel le bouton est mis
             RelativeLayout editLayout = (RelativeLayout) findViewById(R.id.editLayout);
 
+
+            // Width et height du bouton
             RelativeLayout.LayoutParams editLayoutP = new RelativeLayout.LayoutParams(300, 150);
+            // Mettre le bouton au dessous de l'EditText "HArriveeBD"
             editLayoutP.addRule(RelativeLayout.BELOW, R.id.HArriveeBD);
+            // Mettre le bouton à droite du bouton "Retour"
             editLayoutP.addRule(RelativeLayout.RIGHT_OF, R.id.Retour);
+            // Margins du bouton
             editLayoutP.setMargins(50, 50, 50, 50);
+            // Paddings du bouton
             Modifier.setPadding(20, 20, 20, 20);
-            //border
+            // Border radius
             GradientDrawable shape = new GradientDrawable();
             shape.setShape(GradientDrawable.RECTANGLE);
             shape.setCornerRadius(10);
+            // Couleur background
             shape.setColor(Color.rgb(98, 0, 238));
             Modifier.setBackground(shape);
-            //
-           //Modifier.setBackgroundResource(R.color.purple_500);
+
+            // Taille texte
             Modifier.setTextSize(18);
 
+            // Couleur texte
             Modifier.setTextColor(Color.WHITE);
 
-
-
-
+            // Ajout du bouton au layout avec ses paramétres
             editLayout.addView(Modifier, editLayoutP);
-            // editLayout.setPadding(80, 50, 50, 50);
 
-       /* ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) editLayout.getLayoutParams();
-        params.width = 200; params.leftMargin = 100; params.topMargin = 200;
-        Modifier.setLayoutParams(params);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
-                RelativeLayout.LayoutParams.WRAP_CONTENT,
-                RelativeLayout.LayoutParams.WRAP_CONTENT
-        );
-        params.setMargins(30, 10, 10, 10);
-        Modifier.setLayoutParams(params);*/
-
-            //Modifier.setTextColor(R.color.purple_500);
-            //Modifier.setWidth(100);
             Modifier.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // url to post our data
-
-                    try {
-                        RequestQueue requestQueue = Volley.newRequestQueue(EditVol.this);
-                        String URL = "http://192.168.1.137:80/api_Aerosoft/api/crudVol/update.php";
-                        JSONObject jsonBody = new JSONObject();
-                        String NumVol = String.valueOf(NumVolBD.getText());
-                        String AeroportDept = String.valueOf(AeroportDeptBD.getText());
-                        String HDepart = String.valueOf(HDepartBD.getText());/*+":00"*/
-                        String AeroportArr = String.valueOf(AeroportArrBD.getText());
-                        String HArrivee = String.valueOf(HArriveeBD.getText());/*+":00"*/
-                        jsonBody.put("NumVol", NumVol);
-                        jsonBody.put("AeroportDept", AeroportDept);
-                        jsonBody.put("HDepart", HDepart);
-                        jsonBody.put("AeroportArr", AeroportArr);
-                        jsonBody.put("HArrivee", HArrivee);
-                        final String requestBody = jsonBody.toString();
-
-                        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                Log.i("VOLLEY", response);
-                                Toast toast = Toast.makeText(getApplicationContext(), "Succès : Le vol a été modifié.", Toast.LENGTH_SHORT);
-
-                                toast.show();
-                            }
-                        }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Log.e("VOLLEY", error.toString());
-                            }
-                        }) {
-                            @Override
-                            public String getBodyContentType() {
-                                return "application/json; charset=utf-8";
-                            }
-
-                            @Override
-                            public byte[] getBody() throws AuthFailureError {
-                                try {
-                                    return requestBody == null ? null : requestBody.getBytes("utf-8");
-                                } catch (UnsupportedEncodingException uee) {
-                                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
-                                    return null;
-                                }
-                            }
-
-                            @Override
-                            protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                                String responseString = "";
-                                if (response != null) {
-                                    responseString = String.valueOf(response.statusCode);
-                                    // can get more details such as response.headers
-                                }
-                                return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
-                            }
-                        };
-
-                        requestQueue.add(stringRequest);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
+                    UpdateVol();
                 }
             });
         }
     }
-   /* private Map<String, String> checkjsonBody(Map<String, String> map){
-        Iterator<Map.Entry<String, String>> it = map.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry<String, String> pairs = (Map.Entry<String, String>)it.next();
-            if(pairs.getValue()==null){
-                map.put(pairs.getKey(), "");
-            }
+
+    private void UpdateVol(){
+        try {
+            // Requette POST
+            RequestQueue requestQueue = Volley.newRequestQueue(EditVol.this);
+            String URL = "http://10.75.25.250:8080/api_Aerosoft/api/crudVol/update.php";
+            // Données à envoiyées
+            JSONObject jsonBody = new JSONObject();
+            String NumVol = String.valueOf(NumVolBD.getText());
+            String AeroportDept = String.valueOf(AeroportDeptBD.getText());
+            String HDepart = String.valueOf(HDepartBD.getText()+":00");
+            String AeroportArr = String.valueOf(AeroportArrBD.getText());
+            String HArrivee = String.valueOf(HArriveeBD.getText()+":00");
+            jsonBody.put("NumVol", NumVol);
+            jsonBody.put("AeroportDept", AeroportDept);
+            jsonBody.put("HDepart", HDepart);
+            jsonBody.put("AeroportArr", AeroportArr);
+            jsonBody.put("HArrivee", HArrivee);
+            final String requestBody = jsonBody.toString();
+            //
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+                // Succès
+                @Override
+                public void onResponse(String response) {
+                    Log.i("VOLLEY", response);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Succès : Le vol a été modifié.", Toast.LENGTH_SHORT);
+
+                    toast.show();
+                }
+                //
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e("VOLLEY", error.toString());
+                }
+            }) {
+                @Override
+                public String getBodyContentType() {
+                    return "application/json; charset=utf-8";
+                }
+
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    try {
+                        return requestBody == null ? null : requestBody.getBytes("utf-8");
+                    } catch (UnsupportedEncodingException uee) {
+                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", requestBody, "utf-8");
+                        return null;
+                    }
+                }
+
+                @Override
+                protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                    String responseString = "";
+                    if (response != null) {
+                        responseString = String.valueOf(response.statusCode);
+                        // can get more details such as response.headers
+                    }
+                    return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
+                }
+            };
+
+            requestQueue.add(stringRequest);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        return map;
-    }*/
+    }
     private void extractVol() {
 
-
-
-
-
+        // Requette GET
         StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-
-
-
                         try {
+                            // Le Vol récupéré
                             JSONObject obj = new JSONObject(response);
-                            Log.i("json === ", obj.toString());
-
-                            Log.i("message AeroportDept === ", obj.getString("AeroportDept"));
+                            // Affichage du vol
                             NumVolBD.setText(obj.getString("NumVol"));
                             AeroportDeptBD.setText(obj.getString("AeroportDept"));
-                            HDepartBD.setText(obj.getString("HDepart")/*.substring(0,5)*/);
+                            // substring(0,5) pour améliorer l'affichage des heures
+                            HDepartBD.setText(obj.getString("HDepart").substring(0,5));
                             AeroportArrBD.setText(obj.getString("AeroportArr"));
-                            HArriveeBD.setText(obj.getString("HArrivee")/*.substring(0,5)*/);
+                            HArriveeBD.setText(obj.getString("HArrivee").substring(0,5));
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

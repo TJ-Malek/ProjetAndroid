@@ -5,6 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".listeVol">
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerHorizontal="true"
+
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:text="Vols"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp"/>
             <TextView
                 android:id="@+id/NumVolTitle"
                 android:layout_width="wrap_content"
@@ -14,7 +27,8 @@
                 android:layout_marginTop="8dp"
                 android:text="NumVol"
                 android:textSize="17sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_below="@+id/Title"/>
 
             <TextView
                 android:id="@+id/AeroportDeptTitle"
@@ -26,7 +40,8 @@
                 android:text="AeroDept"
                 android:textSize="17sp"
                 android:textStyle="bold"
-                android:layout_toRightOf="@id/NumVolTitle"/>
+                android:layout_toRightOf="@id/NumVolTitle"
+                android:layout_below="@+id/Title"/>
             <TextView
                 android:id="@+id/HDepartTitle"
                 android:layout_width="wrap_content"
@@ -36,7 +51,8 @@
                 android:text="HDepart"
                 android:textSize="17sp"
                 android:textStyle="bold"
-                android:layout_toRightOf="@id/AeroportDeptTitle"/>
+                android:layout_toRightOf="@id/AeroportDeptTitle"
+                android:layout_below="@+id/Title"/>
             <TextView
                 android:id="@+id/AeroportArrTitle"
                 android:layout_width="wrap_content"
@@ -46,7 +62,8 @@
                 android:text="AeroArr"
                 android:textSize="17sp"
                 android:textStyle="bold"
-                android:layout_toRightOf="@id/HDepartTitle"/>
+                android:layout_toRightOf="@id/HDepartTitle"
+                android:layout_below="@+id/Title"/>
             <TextView
                 android:id="@+id/HArriveeTitle"
                 android:layout_width="wrap_content"
@@ -57,6 +74,7 @@
                 android:textSize="17sp"
                 android:textStyle="bold"
                 android:layout_toRightOf="@id/AeroportArrTitle"
+                android:layout_below="@+id/Title"
                 />
 
     <ScrollView
