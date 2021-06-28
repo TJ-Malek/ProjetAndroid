@@ -3,7 +3,7 @@
         private $host = "127.0.0.1";
         private $database_name = "bdd_social_connect";
         private $username = "root";
-        private $password = "root";
+        private $password = "";
 
         public $conn;
 
