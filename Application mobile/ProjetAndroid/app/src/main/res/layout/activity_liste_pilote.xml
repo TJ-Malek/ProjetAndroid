@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".listeVol">
+    android:layout_height="wrap_content"
+    tools:context=".listePilote">
     <TextView
         android:id="@+id/Title"
         android:layout_width="match_parent"
@@ -16,64 +16,42 @@
         android:background="#306969"
         android:gravity="center"
         android:lines="2"
-        android:text="Vols"
+        android:text="Pilotes"
         android:textSize="30dp"
         android:textStyle="bold" />
     <TextView
-        android:id="@+id/NumVolTitle"
+        android:id="@+id/NomPiloteTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="8dp"
-        android:text="NumVol"
+        android:text="Nom pilote"
         android:textSize="17sp"
         android:textStyle="bold"
         android:layout_below="@+id/Title"/>
     <TextView
-        android:id="@+id/AeroportDeptTitle"
+        android:id="@+id/PrenomPiloteTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="6dp"
+        android:layout_marginLeft="12dp"
         android:layout_marginTop="8dp"
-        android:text="AeroDept"
+        android:text="Prenom pilote"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:layout_toRightOf="@id/NumVolTitle"
+        android:layout_toRightOf="@id/NomPiloteTitle"
         android:layout_below="@+id/Title"/>
     <TextView
-        android:id="@+id/HDepartTitle"
+        android:id="@+id/MatriculeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="125dp"
         android:layout_marginTop="8dp"
-        android:text="HDepart"
+        android:text="Matricule"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:layout_toRightOf="@id/AeroportDeptTitle"
+        android:layout_toRightOf="@id/PrenomPiloteTitle"
         android:layout_below="@+id/Title"/>
-    <TextView
-        android:id="@+id/AeroportArrTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="8dp"
-        android:text="AeroArr"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:layout_toRightOf="@id/HDepartTitle"
-        android:layout_below="@+id/Title"/>
-    <TextView
-        android:id="@+id/HArriveeTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="8dp"
-        android:text="HArrivee"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:layout_toRightOf="@id/AeroportArrTitle"
-        android:layout_below="@+id/Title"
-        />
+
     <ScrollView
         android:id="@+id/layout"
         android:layout_height="match_parent"
@@ -84,7 +62,7 @@
         android:fillViewport="true"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:layout_below="@+id/HArriveeTitle"
+        android:layout_below="@+id/MatriculeTitle"
         >
         <HorizontalScrollView
             android:id="@+id/horizontalView"
