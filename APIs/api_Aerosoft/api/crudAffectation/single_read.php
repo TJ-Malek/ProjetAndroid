@@ -6,32 +6,35 @@
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
     include_once '../../config/database.php';
-    include_once '../../class/avion.php';
+    include_once '../../class/affectation.php';
 
     $database = new Database();
     $db = $database->getConnection();
 
-    $item = new Avion($db);
+    $item = new Affectation($db);
 
-    $item->NumAvion = isset($_GET['NumAvion']) ? $_GET['NumAvion'] : die();
+    $item->IdAffectation = isset($_GET['IdAffectation']) ? $_GET['IdAffectation'] : die();
   
-    $item->getSingleAvion();
+    $item->getSingleAffectation();
 
-    if($item->TypeAvion != null){
+    if($item->AffectationCode != null){
         // create array
-        $avion = array(
+        $affectation = array(
+            "IdAffectation" => $item->IdAffectation,
+            "NumVol" => $item->NumVol,
+            "DateVol" => $item->DateVol,
+            "AffectationCode" => $item->AffectationCode,
             "NumAvion" => $item->NumAvion,
-            "TypeAvion" => $item->TypeAvion,
-            "BaseAeroport" => $item->BaseAeroport
+            "IdPilote" => $item->IdPilote  
             
         );
 
         http_response_code(200);
-        echo json_encode($avion);
+        echo json_encode($affectation);
     }
       
     else{
         http_response_code(404);
-        echo json_encode("Avion non trouvé.");
+        echo json_encode("Affectation non trouvé.");
     }
 ?>

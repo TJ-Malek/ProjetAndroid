@@ -13,7 +13,7 @@
         public $DateVol;
         public $AffectationCode;
         public $NumAvion;
-       
+        public $IdPilote; 
 
         // Db connection
         public function __construct($db){
@@ -22,7 +22,7 @@
 
         // GET ALL
         public function getAffectations(){
-            $sqlQuery = "SELECT IdAffectation, NumVol, DateVol, AffectationCode, NumAvion FROM " . $this->db_table . "";
+            $sqlQuery = "SELECT IdAffectation, NumVol, DateVol, AffectationCode, NumAvion,IdPilote  FROM " . $this->db_table . "";
             $stmt = $this->conn->prepare($sqlQuery);
             $stmt->execute();
             return $stmt;
@@ -36,7 +36,8 @@
             NumVol, 
             DateVol, 
             AffectationCode, 
-            NumAvion 
+            NumAvion,
+            IdPilote 
          
           FROM
             ". $this->db_table ."
@@ -62,7 +63,7 @@
             $this->DateVol = $dataRow['DateVol'];
             $this->AffectationCode = $dataRow['AffectationCode'];
             $this->NumAvion = $dataRow['NumAvion'];
-           
+            $this->IdPilote = $dataRow['IdPilote'];
         }        
 
       
