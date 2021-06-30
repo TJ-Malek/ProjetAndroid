@@ -13,13 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetAndroid"
         android:usesCleartextTraffic="true">
+
+        <activity android:name=".listeVol"></activity>
         <activity android:name=".listePilote"></activity>
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".listeVol">
+        <activity android:name=".listeAvion">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
