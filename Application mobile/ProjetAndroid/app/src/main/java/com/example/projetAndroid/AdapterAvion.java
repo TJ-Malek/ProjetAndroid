@@ -15,7 +15,7 @@ public class AdapterAvion extends ArrayAdapter<Avion> {
 
     public AdapterAvion(List<Avion> Avions, Context mCtx){
         super(mCtx, R.layout.table_avion);
-        this.avions = avions;
+        this.avions = Avions;
         this.mCtx = mCtx;
     }
     //this method returns the list view

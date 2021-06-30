@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:visibility="visible"
+
     tools:context=".listeAvion">
 
     <TextView
@@ -90,8 +90,8 @@
             <!-- android:layout_below="@+id/BaseAeroportTitle" -->
             <ListView
                 android:id="@+id/listViewAvion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/BaseAeroportTitle"
 
                 android:background="#FAFAFA" />

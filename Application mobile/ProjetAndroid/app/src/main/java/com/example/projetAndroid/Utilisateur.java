@@ -9,16 +9,6 @@ public class Utilisateur {
     private String Statut;
     private String IdRole;
 
-    public Utilisateur(String idUtilisateur, String nom, String prenom, String mail, String motDePasse, String statut, String idRole) {
-        IdUtilisateur = idUtilisateur;
-        Nom = nom;
-        Prenom = prenom;
-        Mail = mail;
-        MotDePasse = motDePasse;
-        Statut = statut;
-        IdRole = idRole;
-    }
-
     public String getIdUtilisateur() {
         return IdUtilisateur;
     }
@@ -75,4 +65,13 @@ public class Utilisateur {
         IdRole = idRole;
     }
 
+    public Utilisateur(String idUtilisateur, String nom, String prenom, String mail, String motDePasse, String statut, String idRole) {
+        IdUtilisateur = idUtilisateur;
+        Nom = nom;
+        Prenom = prenom;
+        Mail = mail;
+        MotDePasse = motDePasse;
+        Statut = statut;
+        IdRole = idRole;
+    }
 }

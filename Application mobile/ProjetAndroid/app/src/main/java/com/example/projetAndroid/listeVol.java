@@ -65,6 +65,15 @@ public class listeVol extends AppCompatActivity {
         // Enregistrement du menu contextuelle dans la vue listView
         registerForContextMenu(listView);
         Log.i("message", API_URL);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(view.getId()==R.id.AeroportArr){
+                    Log.i("m","clicked");
+                    Toast.makeText(getApplicationContext(),"clicked = ", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void extractVol() {

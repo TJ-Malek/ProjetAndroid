@@ -46,7 +46,7 @@ public class listeAvion extends AppCompatActivity{
             extractAvions();
 
             // Enregistrement du menu contextuelle dans la vue listView
-            registerForContextMenu(listView);
+           // registerForContextMenu(listView);
             Log.i("message", API_URL);
         }
 
@@ -75,7 +75,7 @@ public class listeAvion extends AppCompatActivity{
                                 for (int i = 0; i < volArray.length(); i++) {
                                     JSONObject volObject = volArray.getJSONObject(i);
 
-                                    Log.i("message",volObject.getString("NumAvion"));
+                                    Log.i("message",volObject.getString("TypeAvion"));
 
                                     Avion avion = new Avion(
                                             volObject.getString("NumAvion"),

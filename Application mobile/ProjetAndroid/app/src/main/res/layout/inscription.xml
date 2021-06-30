@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/inscriptionLayout">
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginLeft="3dp"
+
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="3dp"
+
+        android:layout_marginBottom="10dp"
+        android:background="#306969"
+        android:gravity="center"
+
+        android:lines="2"
+        android:text="Inscription"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/Nom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nom : "
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="40dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@+id/Title"
+        />
+    <EditText
+        android:id="@+id/NomBD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="113dp"
+        tools:layout_editor_absoluteY="76dp"
+        android:layout_toRightOf="@+id/Nom"
+        android:layout_below="@+id/Title"/>
+
+    <TextView
+        android:id="@+id/Prenom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prenom : "
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="40dp"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/Nom"
+        android:layout_marginLeft="10dp"
+        />
+
+
+    <EditText
+        android:id="@+id/PrenomBD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="113dp"
+        tools:layout_editor_absoluteY="76dp"
+        android:layout_toRightOf="@+id/Prenom"
+        android:layout_below="@+id/NomBD"/>
+    <TextView
+        android:id="@+id/Mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mail : "
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="40dp"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/Prenom"
+        android:layout_marginLeft="10dp"
+        />
+
+
+    <EditText
+        android:id="@+id/MailBD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="113dp"
+        tools:layout_editor_absoluteY="76dp"
+        android:layout_toRightOf="@+id/Mail"
+        android:layout_below="@+id/PrenomBD"/>
+
+
+    <TextView
+        android:id="@+id/MotDePasse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Mail"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="31dp"
+        android:text="Mot de passe : "
+        tools:layout_editor_absoluteX="19dp"
+        tools:layout_editor_absoluteY="40dp" />
+
+    <EditText
+        android:id="@+id/MotDePasseBD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="113dp"
+        tools:layout_editor_absoluteY="76dp"
+        android:layout_toRightOf="@+id/MotDePasse"
+        android:layout_below="@+id/MailBD"/>
+
+    <Button
+        android:id="@+id/Retour"
+        android:layout_width="300px"
+        android:layout_height="180px"
+        android:layout_below="@+id/MotDePasse"
+        android:layout_marginLeft="10px"
+        android:layout_marginTop="30dp"
+        android:padding="20px"
+        android:text="Retour"
+        android:textSize="18dp" />
+
+    <Button
+        android:id="@+id/Enregistrer"
+        android:layout_width="wrap_content"
+        android:layout_height="180px"
+        android:layout_below="@+id/MotDePasse"
+        android:layout_marginLeft="10px"
+        android:layout_marginTop="30dp"
+        android:layout_toRightOf="@+id/Retour"
+        android:padding="20px"
+        android:text="Enregistrer"
+        android:textSize="18dp" />
+</RelativeLayout>
