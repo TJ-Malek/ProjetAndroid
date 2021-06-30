@@ -34,7 +34,10 @@
 
         // CREATE
         public function createUtilisateur(){
-            if($this->VerifUser()==null){
+            do {
+                $this->IdUtilisateur =  rand(00000000,99999999);
+            } while($this->VerifUser()!=null);
+            if(($this->VerifUser()==null)&&($this->VerifUserMail()==null)){
                 $sqlQuery = "INSERT INTO ". $this->db_table[0] ."
                         SET 
                             IdUtilisateur = :IdUtilisateur,
@@ -49,7 +52,7 @@
                 $stmt = $this->conn->prepare($sqlQuery);
 
                 // sanitize
-                $this->IdUtilisateur=htmlspecialchars(strip_tags($this->IdUtilisateur));
+                //$this->IdUtilisateur=htmlspecialchars(strip_tags($this->IdUtilisateur));
                 $this->Nom=htmlspecialchars(strip_tags($this->Nom));
                 $this->Prenom=htmlspecialchars(strip_tags($this->Prenom));
                 $this->Mail=htmlspecialchars(strip_tags($this->Mail));
@@ -67,11 +70,13 @@
                 $stmt->bindParam(":IdRole", $this->IdRole);
 
                 if($stmt->execute()){
+                    http_response_code(201);
                 return true;
                 }
                     return false;
             }
             else {
+               
                 echo "User existe déjà dans la base";
             }
         }
@@ -95,7 +100,26 @@
         return $data; 
 
         }
+        public function VerifUserMail(){
+            $sqlQuery = "SELECT *         
+          FROM
+            ". $this->db_table[0] ."
+            INNER JOIN " . $this->db_table[1] ."
+            ON roles.IdRole = utilisateur.IdRole
+        WHERE 
+        Mail = ?
+        LIMIT 0,1";
 
+        $stmt = $this->conn->prepare($sqlQuery);
+
+        $stmt->bindParam(1, $this->Mail);
+
+        $stmt->execute();
+
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $data; 
+
+        }
         public function getSingleUtilisateur(){
            
             $dataRow = $this->VerifUser();

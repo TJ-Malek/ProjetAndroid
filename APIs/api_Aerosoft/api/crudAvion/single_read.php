@@ -31,7 +31,7 @@
     }
       
     else{
-        http_response_code(404);
+        //http_response_code(404);
         echo json_encode("Avion non trouvé.");
     }
 ?>
