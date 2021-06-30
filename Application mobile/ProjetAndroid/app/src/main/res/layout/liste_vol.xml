@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8c3a884671f9663d71600a707548de17a4da92e4
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,6 +24,7 @@
         android:textSize="30dp"
         android:textStyle="bold" />
     <TextView
+<<<<<<< HEAD
         android:id="@+id/NumVolTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -74,6 +79,67 @@
         android:layout_toRightOf="@id/AeroportArrTitle"
         android:layout_below="@+id/Title"
         />
+=======
+                android:id="@+id/NumVolTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="8dp"
+                android:text="NumVol"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_below="@+id/Title"/>
+
+            <TextView
+                android:id="@+id/AeroportDeptTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="8dp"
+                android:text="AeroDept"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/NumVolTitle"
+                android:layout_below="@+id/Title"/>
+            <TextView
+                android:id="@+id/HDepartTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="8dp"
+                android:text="HDepart"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/AeroportDeptTitle"
+                android:layout_below="@+id/Title"/>
+            <TextView
+                android:id="@+id/AeroportArrTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="8dp"
+                android:text="AeroArr"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/HDepartTitle"
+                android:layout_below="@+id/Title"/>
+            <TextView
+                android:id="@+id/HArriveeTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="8dp"
+                android:text="HArrivee"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/AeroportArrTitle"
+                android:layout_below="@+id/Title"
+                />
+   
+
+>>>>>>> 8c3a884671f9663d71600a707548de17a4da92e4
     <ScrollView
         android:id="@+id/layout"
         android:layout_height="match_parent"
@@ -100,6 +166,10 @@
                 android:background="#FAFAFA"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8c3a884671f9663d71600a707548de17a4da92e4
                 android:layout_below="@id/HArriveeTitle"/>
         </HorizontalScrollView>
     </ScrollView>
@@ -111,5 +181,10 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:theme="@color/colorPrimary"
+<<<<<<< HEAD
         />
+=======
+       />
+
+>>>>>>> 8c3a884671f9663d71600a707548de17a4da92e4
 </RelativeLayout>

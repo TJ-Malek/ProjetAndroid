@@ -58,7 +58,7 @@
             $sqlQuery = "SELECT
                         NumAvion, 
                         TypeAvion, 
-                        BaseAeroport, 
+                        BaseAeroport 
                       FROM
                         ". $this->db_table ."
                     WHERE 
@@ -67,10 +67,10 @@
 
             $stmt = $this->conn->prepare($sqlQuery);
 
-            $stmt->bindParam(1, $this->Numvion);
-            echo json_encode($this->Numvion);
+            $stmt->bindParam(1, $this->NumAvion);
+            /*echo json_encode($this->Numvion);
             //echo json_encode($stmt);
-die();
+die();*/
             $stmt->execute();
             
             $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);

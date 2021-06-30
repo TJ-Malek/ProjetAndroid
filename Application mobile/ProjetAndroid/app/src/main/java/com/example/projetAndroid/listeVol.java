@@ -44,7 +44,7 @@ public class listeVol extends AppCompatActivity {
     SharedPreferences  sharedpreferences;
     List<Vol> Vol;
 
-    private static String API_URL="http://10.75.25.176:8080/api_Aerosoft/api/crudVol/read.php";
+    private String API_URL;
     private static final int MENU_ITEM_EDIT = 111;
     private static final int MENU_ITEM_DELETE = 222;
    // Adapter adapter;
@@ -54,8 +54,9 @@ public class listeVol extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.liste_vol);
-        Log.i("message", "create.");
-        listView = (ListView) findViewById(R.id.listView);
+        API_URL=getString(R.string.api_link)+"/api_Aerosoft/api/crudVol/read.php";
+
+       listView = (ListView) findViewById(R.id.listView);
         Vol= new ArrayList<>();
 
         // Affichage liste des vols
@@ -63,6 +64,7 @@ public class listeVol extends AppCompatActivity {
 
         // Enregistrement du menu contextuelle dans la vue listView
         registerForContextMenu(listView);
+        Log.i("message", API_URL);
     }
 
     private void extractVol() {
@@ -202,7 +204,7 @@ public class listeVol extends AppCompatActivity {
         // Requette POST
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(listeVol.this);
-            String URL = "http://10.75.25.176:8080/api_Aerosoft/api/crudVol/delete.php";
+            String URL = getString(R.string.api_link)+"/api_Aerosoft/api/crudVol/delete.php";
             JSONObject jsonBody = new JSONObject();
             String NumVol = String.valueOf(selectedVol.getNumVol());
 
