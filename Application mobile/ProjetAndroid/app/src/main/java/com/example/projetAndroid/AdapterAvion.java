@@ -13,9 +13,9 @@ public class AdapterAvion extends ArrayAdapter<Avion> {
     private List<Avion> avions;
     private Context mCtx;
 
-    public AdapterAvion(List<Avion> Avions, Context mCtx){
-        super(mCtx, R.layout.table_avion);
-        this.avions = Avions;
+    public AdapterAvion(List<com.example.projetAndroid.Avion> avions, Context mCtx){
+        super(mCtx, R.layout.table_avion, avions);
+        this.avions = avions;
         this.mCtx = mCtx;
     }
     //this method returns the list view
