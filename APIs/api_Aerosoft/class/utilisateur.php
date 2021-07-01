@@ -131,6 +131,37 @@
            
         }
         
+        public function GetUserToActivate(){
+            $sqlQuery = "SELECT * FROM " . $this->db_table[0] . "
+                        INNER JOIN " . $this->db_table[1] ."
+                        ON roles.IdRole = utilisateur.IdRole
+                        WHERE Statut = 0";
+            $stmt = $this->conn->prepare($sqlQuery);
+            $stmt->execute();
+            return $stmt;
+        }
+
+        public function activateUser(){
+            $sqlQuery = "UPDATE
+                        ". $this->db_table[0] ."
+                    SET
+                        Statut = 1
+                    WHERE 
+                        IdUtilisateur = :IdUtilisateur";
+        
+            $stmt = $this->conn->prepare($sqlQuery);
+            $this->IdUtilisateur=htmlspecialchars(strip_tags($this->IdUtilisateur));
+        
+            // bind data
+
+            $stmt->bindParam(":IdUtilisateur", $this->IdUtilisateur);
+        
+            if($stmt->execute()){
+                return true;
+            }
+            return false;
+        }  
+        
         // UPDATE
         public function updateUtilisateur(){
             $sqlQuery = "UPDATE

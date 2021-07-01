@@ -29,8 +29,7 @@
                 "Nom" => $Nom,
                 "Prenom" => $Prenom,
                 "Mail" => $Mail,
-                "Statut" => $Statut,
-                "RoleNom" => $RoleNom
+                "Statut" => $Statut
             );
 
             array_push($UserArr["utilisateurs"], $e);
