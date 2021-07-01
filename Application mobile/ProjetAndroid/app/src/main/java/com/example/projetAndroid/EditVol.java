@@ -68,7 +68,7 @@ import org.json.JSONException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditVol extends AppCompatActivity  implements AdapterView.OnItemSelectedListener {
+public class EditVol extends AppCompatActivity  {
     String API_URL;
     TextView NumVolBD;
     EditText HDepartBD, HArriveeBD;
@@ -97,7 +97,7 @@ public class EditVol extends AppCompatActivity  implements AdapterView.OnItemSel
 
 
         API_URL = getString(R.string.api_link)+"/api_Aerosoft/api/crudVol/single_read.php?NumVol=" + NumVol;
-        Log.i("message : url = ", getString(R.string.api_link)+"/api_Aerosoft/api/crudVol/single_read.php?NumVol=");
+        Log.i("message : url = ", API_URL);
 
         NumVolBD = (TextView) findViewById(R.id.NumVolBD);
         AeroportDeptBD = (Spinner) findViewById(R.id.AeroportDeptBD);
@@ -348,17 +348,6 @@ public class EditVol extends AppCompatActivity  implements AdapterView.OnItemSel
         requestQueue.add(stringRequest);
 
     }
-    @Override
-    public void onItemSelected(AdapterView adapter, View v, int i, long lng) {
 
-        if(v.hasFocus() ){
-            Toast.makeText(getApplicationContext(), (CharSequence) AeroportDeptBD.getSelectedItem(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 }
 

@@ -1,5 +1,6 @@
 package com.example.projetAndroid;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -43,6 +44,13 @@ public class Inscription extends AppCompatActivity {
         MotDePasseBD = (EditText) findViewById(R.id.MotDePasseBD);
         Enregistrer = (Button) findViewById(R.id.Enregistrer);
         Retour = (Button) findViewById(R.id.Retour);
+        Retour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Inscription.this, LoginActivity.class);
+                startActivity(i);
+            }
+        });
         Enregistrer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

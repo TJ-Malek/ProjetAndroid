@@ -1,15 +1,14 @@
 package com.example.projetAndroid;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,35 +24,34 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class listePilote extends AppCompatActivity {
-    ListView listView;
+public class listeAffectation extends AppCompatActivity { ListView listView;
     SharedPreferences sharedpreferences;
-    List<Pilote> Pilote;
-    TextView msgEmpty;
+    List<Affectation> Affectation;
 
     private String API_URL;
     private static final int MENU_ITEM_EDIT = 111;
     private static final int MENU_ITEM_DELETE = 222;
+    // Adapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_liste_pilote);
-        API_URL=getString(R.string.api_link)+"/api_Aerosoft/api/crudPilote/read.php";
-        Log.i("message", "create.");
-        listView = (ListView) findViewById(R.id.listView);
+        setContentView(R.layout.liste_affectation);
+        API_URL=getString(R.string.api_link)+"/api_Aerosoft/api/crudAffectation/read.php";
 
-        Pilote= new ArrayList<>();
+        listView = (ListView) findViewById(R.id.listViewAffectation);
+        Affectation= new ArrayList<>();
 
-        msgEmpty = (TextView) findViewById(R.id.emptyElement);
+        // Affichage liste des affectations
+        extractAffectation();
 
-        // Affichage liste des vols
-        extractPilote();
 
-        // Enregistrement du menu contextuelle dans la vue listView
-        registerForContextMenu(listView);
+        Log.i("message", API_URL);
+
     }
-    private void extractPilote() {
+
+    private void extractAffectation() {
 
         final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
         //making the progressbar visible
@@ -73,31 +71,27 @@ public class listePilote extends AppCompatActivity {
                             // Récupération du résultat
                             JSONObject obj = new JSONObject(response);
 
-                            // Verification du contenu de la liste
-                            if (obj.getString("pilote").equals("No record found.")){
-                                msgEmpty.setVisibility(View.VISIBLE);
-                            }
+                            JSONArray affectationArray = obj.getJSONArray("affectation");
 
-                            JSONArray piloteArray = obj.getJSONArray("pilote");
-                            //JSONArray piloteMsg = obj.getJSONArray("message");
-                            Log.i("msg",piloteArray.toString());
+                            // Pour chaque affectation dans l'array récupéré
+                            for (int i = 0; i < affectationArray.length(); i++) {
+                                JSONObject affectationObject = affectationArray.getJSONObject(i);
 
-                            // Pour chaque pilote dans l'array récupéré
-                            for (int i = 0; i < piloteArray.length(); i++) {
-                                JSONObject piloteObject = piloteArray.getJSONObject(i);
-                                Pilote pilote = new Pilote(
-                                        piloteObject.getString("IdPilote"),
-                                        piloteObject.getString("NomPilote"),
-                                        piloteObject.getString("PrenomPilote"),
-                                        piloteObject.getString("Matricule")
+                                Affectation affectation = new Affectation(
+                                        affectationObject.getString("IdAffectation"),
+                                        affectationObject.getString("NumVol"),
+                                        affectationObject.getString("DateVol"),
+                                        affectationObject.getString("NumAvion"),
+                                        affectationObject.getString("IdPilote")
+
 
                                 );
 
-                                Pilote.add(pilote);
+                                Affectation.add(affectation);
 
                             }
-                            // Ajouter les pilotes à listView
-                            AdapterPilote adapter = new AdapterPilote(Pilote, getApplicationContext());
+                            // Ajouter les affectation à listView
+                            AdapterAffectation adapter = new AdapterAffectation(Affectation, getApplicationContext());
 
                             listView.setAdapter(adapter);
 
@@ -121,4 +115,8 @@ public class listePilote extends AppCompatActivity {
         requestQueue.add(stringRequest);
 
     }
+
+
+
+
 }

@@ -15,7 +15,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Username, Email(uniquement) //activity_login.xml"
+                android:text="Mail"
                 android:textSize="20dp">
             </TextView>
             <EditText
@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
-                android:hint="Username or Email"
+                android:hint="Votre Email"
                 android:inputType="textAutoComplete"
                 android:singleLine="true"
                 android:textSize="20dp">
@@ -31,7 +31,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Mot de Passe //activity_login.xml"
+                android:text="Mot de Passe"
                 android:textSize="20dp">
             </TextView>
             <EditText
@@ -39,7 +39,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
-                android:hint="Password"
+                android:hint="Votre mot de passe"
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:textSize="20dp">

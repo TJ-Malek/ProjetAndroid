@@ -35,22 +35,22 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //registerTV = findViewById(R.id.registerTV);
+        registerTV = findViewById(R.id.registerTV);
         user = findViewById(R.id.user);
         password = findViewById(R.id.password);
         loginBtn = findViewById(R.id.loginBtn);
 
         sharedPrefrencesHelper = new SharedPrefrencesHelper(this);
-        /*
+
         // XXXXX clic TextView
         registerTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), RegisterActivity.class));
+                startActivity(new Intent(getBaseContext(), Inscription.class));
             }
         });
 
-         */
+
         // XXXXX clic Button
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
