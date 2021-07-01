@@ -16,8 +16,7 @@
         android:layout_marginRight="3dp"
 
         android:layout_marginBottom="10dp"
-        android:background="@color/purple_500"
-        android:textColor="@color/white"
+        android:background="#306969"
         android:gravity="center"
 
         android:lines="2"
