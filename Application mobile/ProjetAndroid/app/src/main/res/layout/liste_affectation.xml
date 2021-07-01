@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    tools:context=".listeAvion">
-
+    tools:context=".listeAffectation">
     <TextView
         android:id="@+id/Title"
         android:layout_width="match_parent"
@@ -13,6 +12,7 @@
 
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginLeft="3dp"
+
         android:layout_marginTop="3dp"
         android:layout_marginRight="3dp"
 
@@ -22,93 +22,115 @@
         android:gravity="center"
 
         android:lines="2"
-        android:text="Avions"
+        android:text="Affectations"
         android:textSize="30dp"
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/IdAffectationTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:text="IdAffectation"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/Title"
+        android:textColor="@color/purple_500"/>
+
+    <TextView
+        android:id="@+id/NumVolTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="8dp"
+        android:text="NVol"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_toRightOf="@id/IdAffectationTitle"
+        android:layout_below="@+id/Title"
+        android:textColor="@color/purple_500"/>
+    <TextView
+        android:id="@+id/DateVolTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="8dp"
+        android:text="DateVol"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_toRightOf="@id/NumVolTitle"
+        android:layout_below="@+id/Title"
+        android:textColor="@color/purple_500"/>
+    <TextView
         android:id="@+id/NumAvionTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_below="@+id/Title"
-        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="8dp"
-        android:text="NumAvion"
+        android:text="NAvion"
         android:textSize="17sp"
         android:textStyle="bold"
+        android:layout_toRightOf="@id/DateVolTitle"
+        android:layout_below="@+id/Title"
         android:textColor="@color/purple_500"/>
-
     <TextView
-        android:id="@+id/TypeAvionTitle"
+        android:id="@+id/IdPiloteTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_below="@+id/Title"
-        android:layout_marginLeft="6dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="8dp"
+        android:text="IdPilote"
+        android:textSize="17sp"
+        android:textStyle="bold"
         android:layout_toRightOf="@id/NumAvionTitle"
-        android:text="TypeAvion"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:textColor="@color/purple_500"/>
-
-    <TextView
-        android:id="@+id/BaseAeroportTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_below="@+id/Title"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="8dp"
-        android:layout_toRightOf="@id/TypeAvionTitle"
-        android:text="BaseAeroport"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:textColor="@color/purple_500"/>
+        android:textColor="@color/purple_500"
+        />
 
-
-    <!-- android:layout_width="match_parent" -->
 
     <ScrollView
         android:id="@+id/layout"
+        android:layout_height="match_parent"
+        android:scrollbars="horizontal|vertical"
         android:layout_width="match_parent"
-        android:layout_height="439dp"
-        android:layout_below="@+id/BaseAeroportTitle"
         android:layout_marginTop="5dip"
+        android:scrollbarStyle="outsideInset"
         android:fillViewport="true"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:scrollbarStyle="outsideInset"
-        android:scrollbars="horizontal|vertical">
-
+        android:layout_below="@+id/IdPiloteTitle"
+        >
 
         <HorizontalScrollView
             android:id="@+id/horizontalView"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:scrollbars="horizontal|vertical"
+            android:layout_width="wrap_content"
             android:layout_marginTop="5dip"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:scrollbars="horizontal|vertical">
 
-            <!-- android:layout_below="@+id/BaseAeroportTitle" -->
+            >
             <ListView
-                android:id="@+id/listView"
+                android:id="@+id/listViewAffectation"
+                android:background="#FAFAFA"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/BaseAeroportTitle"
 
-                android:background="#FAFAFA" />
+                android:layout_below="@id/IdPiloteTitle"/>
         </HorizontalScrollView>
     </ScrollView>
-
     <ProgressBar
+        android:visibility="gone"
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:theme="@color/colorPrimary"
-        android:visibility="gone" />
+        />
 
 </RelativeLayout>

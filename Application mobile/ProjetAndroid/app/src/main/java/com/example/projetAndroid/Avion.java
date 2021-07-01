@@ -19,6 +19,5 @@ public class Avion {
         this.BaseAeroport = baseAeroport;
     }
 
-    public Avion() {
-    }
+
 }

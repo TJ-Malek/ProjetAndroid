@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,8 +45,8 @@ public class listeVol extends AppCompatActivity {
     ListView listView;
     SharedPreferences  sharedpreferences;
     List<Vol> Vol;
-
-    private String API_URL;
+    FloatingActionButton Ajouter;
+    private  String API_URL;
     private static final int MENU_ITEM_EDIT = 111;
     private static final int MENU_ITEM_DELETE = 222;
    // Adapter adapter;
@@ -55,25 +57,33 @@ public class listeVol extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.liste_vol);
         API_URL=getString(R.string.api_link)+"/api_Aerosoft/api/crudVol/read.php";
-
-       listView = (ListView) findViewById(R.id.listView);
+        Log.i("message", "create.");
+        listView = (ListView) findViewById(R.id.listView);
         Vol= new ArrayList<>();
 
         // Affichage liste des vols
         extractVol();
+// Création bouton ajouter
 
+        Ajouter = new FloatingActionButton(this);
+        // Layout dans lequel le bouton est mis
+        RelativeLayout editLayout = (RelativeLayout) findViewById(R.id.listeVol);
+
+
+        // Width et height du bouton
+        RelativeLayout.LayoutParams editLayoutA = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        //Ajouter.setBackgroundDrawable();
+        Ajouter.setImageDrawable(getResources().getDrawable(R.drawable.ic_input_add,getApplicationContext().getTheme()));
+        Ajouter.setBackgroundTintList(getResources().getColorStateList(R.color.purple_500,getApplicationContext().getTheme()));
+        editLayoutA.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        editLayoutA.addRule(RelativeLayout.ALIGN_PARENT_END);
+        editLayoutA.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        editLayoutA.setMargins(16,16,16,16);
+       /* editLayoutA.addRule(Gravity.END);
+        editLayoutA.addRule(Gravity.BOTTOM);*/
+        editLayout.addView(Ajouter, editLayoutA);
         // Enregistrement du menu contextuelle dans la vue listView
         registerForContextMenu(listView);
-        Log.i("message", API_URL);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(view.getId()==R.id.AeroportArr){
-                    Log.i("m","clicked");
-                    Toast.makeText(getApplicationContext(),"clicked = ", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
     private void extractVol() {

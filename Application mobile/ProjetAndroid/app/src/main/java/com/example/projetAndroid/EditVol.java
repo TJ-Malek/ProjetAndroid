@@ -97,7 +97,7 @@ public class EditVol extends AppCompatActivity  implements AdapterView.OnItemSel
 
 
         API_URL = getString(R.string.api_link)+"/api_Aerosoft/api/crudVol/single_read.php?NumVol=" + NumVol;
-        Log.i("message : url = ", getString(R.string.api_link)+"/api_Aerosoft/api/crudVol/single_read.php?NumVol=");
+        Log.i("message : url = ", API_URL);
 
         NumVolBD = (TextView) findViewById(R.id.NumVolBD);
         AeroportDeptBD = (Spinner) findViewById(R.id.AeroportDeptBD);

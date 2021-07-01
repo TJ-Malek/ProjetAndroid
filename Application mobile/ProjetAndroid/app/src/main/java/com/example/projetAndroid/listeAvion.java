@@ -39,7 +39,7 @@ public class listeAvion extends AppCompatActivity{
             setContentView(R.layout.liste_avion);
             API_URL=getString(R.string.api_link)+"/api_Aerosoft/api/crudAvion/read.php";
 
-            listView = (ListView) findViewById(R.id.listViewAvion);
+            listView = (ListView) findViewById(R.id.listView);
             avions= new ArrayList<>();
 
             // Affichage liste des avions
@@ -47,7 +47,7 @@ public class listeAvion extends AppCompatActivity{
 
             // Enregistrement du menu contextuelle dans la vue listView
            // registerForContextMenu(listView);
-            Log.i("message", API_URL);
+            Log.i("message link", API_URL);
         }
 
         private void extractAvions() {
@@ -75,7 +75,7 @@ public class listeAvion extends AppCompatActivity{
                                 for (int i = 0; i < volArray.length(); i++) {
                                     JSONObject volObject = volArray.getJSONObject(i);
 
-                                    Log.i("message",volObject.getString("TypeAvion"));
+                                    Log.i("message type",volObject.getString("TypeAvion"));
 
                                     Avion avion = new Avion(
                                             volObject.getString("NumAvion"),
