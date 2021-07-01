@@ -24,22 +24,21 @@
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             extract($row);
-            $e = array(
+            $pilote = array(
                 "IdPilote" => $IdPilote,
                 "NomPilote" => $NomPilote,
                 "PrenomPilote" => $PrenomPilote,
                 "Matricule" => $Matricule
             );
 
-            array_push($PiloteArr["pilote"], $e);
+            array_push($PiloteArr["pilote"], $pilote);
         }
         echo json_encode($PiloteArr);
     }
 
     else{
-        //http_response_code(404);
         echo json_encode(
-            array("message" => "No record found.")
+            array("pilote" => "No record found.")
         );
     }
 ?>

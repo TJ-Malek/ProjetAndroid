@@ -10,7 +10,7 @@
 
     $items = new Utilisateur($db);
 
-    $stmt = $items->getUtilisateurs();
+    $stmt = $items->GetUserToActivate();
     $itemCount = $stmt->rowCount();
 
 

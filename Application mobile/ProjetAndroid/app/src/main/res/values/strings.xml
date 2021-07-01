@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Projet Android</string>
-    <string name="api_link">http://10.75.25.250:8080</string>
+    <string name="vide">La liste est vide</string>
 </resources>

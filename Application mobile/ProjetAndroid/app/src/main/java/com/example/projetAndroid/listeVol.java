@@ -44,7 +44,7 @@ public class listeVol extends AppCompatActivity {
     SharedPreferences  sharedpreferences;
     List<Vol> Vol;
 
-    private String API_URL;
+    private static String API_URL="http://10.75.25.176:8080/api_Aerosoft/api/crudVol/read.php";
     private static final int MENU_ITEM_EDIT = 111;
     private static final int MENU_ITEM_DELETE = 222;
    // Adapter adapter;
@@ -54,9 +54,8 @@ public class listeVol extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.liste_vol);
-        API_URL=getString(R.string.api_link)+"/api_Aerosoft/api/crudVol/read.php";
-
-       listView = (ListView) findViewById(R.id.listView);
+        Log.i("message", "create.");
+        listView = (ListView) findViewById(R.id.listView);
         Vol= new ArrayList<>();
 
         // Affichage liste des vols
@@ -64,16 +63,6 @@ public class listeVol extends AppCompatActivity {
 
         // Enregistrement du menu contextuelle dans la vue listView
         registerForContextMenu(listView);
-        Log.i("message", API_URL);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(view.getId()==R.id.AeroportArr){
-                    Log.i("m","clicked");
-                    Toast.makeText(getApplicationContext(),"clicked = ", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
     private void extractVol() {
@@ -213,7 +202,7 @@ public class listeVol extends AppCompatActivity {
         // Requette POST
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(listeVol.this);
-            String URL = getString(R.string.api_link)+"/api_Aerosoft/api/crudVol/delete.php";
+            String URL = "http://10.75.25.176:8080/api_Aerosoft/api/crudVol/delete.php";
             JSONObject jsonBody = new JSONObject();
             String NumVol = String.valueOf(selectedVol.getNumVol());
 

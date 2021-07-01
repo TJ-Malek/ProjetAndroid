@@ -13,16 +13,16 @@
 
     $item = new Avion($db);
 
-    $item->NumAvion = isset($_GET['NumAvion']) ? $_GET['NumAvion'] : die();
+    $item->NumVol = isset($_GET['NumAvion']) ? $_GET['NumAvion'] : die();
   
     $item->getSingleAvion();
 
     if($item->TypeAvion != null){
         // create array
-        $avion = array(
+        $vol = array(
             "NumAvion" => $item->NumAvion,
             "TypeAvion" => $item->TypeAvion,
-            "BaseAeroport" => $item->BaseAeroport
+            "BaseAeroport" => $item->BaseAeroport,
             
         );
 
@@ -31,7 +31,6 @@
     }
       
     else{
-        //http_response_code(404);
         echo json_encode("Avion non trouvé.");
     }
 ?>

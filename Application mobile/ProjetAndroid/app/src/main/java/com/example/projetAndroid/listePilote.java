@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -28,8 +29,9 @@ public class listePilote extends AppCompatActivity {
     ListView listView;
     SharedPreferences sharedpreferences;
     List<Pilote> Pilote;
+    TextView msgEmpty;
 
-    private static String API_URL="http://10.75.25.176:8080/api_Aerosoft/api/crudPilote/read.php";
+    private static String API_URL="http://10.75.25.39:8080/api_Aerosoft/api/crudPilote/read.php";
     private static final int MENU_ITEM_EDIT = 111;
     private static final int MENU_ITEM_DELETE = 222;
 
@@ -40,7 +42,10 @@ public class listePilote extends AppCompatActivity {
 
         Log.i("message", "create.");
         listView = (ListView) findViewById(R.id.listView);
+
         Pilote= new ArrayList<>();
+
+        msgEmpty = (TextView) findViewById(R.id.emptyElement);
 
         // Affichage liste des vols
         extractPilote();
@@ -68,12 +73,18 @@ public class listePilote extends AppCompatActivity {
                             // Récupération du résultat
                             JSONObject obj = new JSONObject(response);
 
+                            // Verification du contenu de la liste
+                            if (obj.getString("pilote").equals("No record found.")){
+                                msgEmpty.setVisibility(View.VISIBLE);
+                            }
+
                             JSONArray piloteArray = obj.getJSONArray("pilote");
+                            //JSONArray piloteMsg = obj.getJSONArray("message");
+                            Log.i("msg",piloteArray.toString());
 
                             // Pour chaque pilote dans l'array récupéré
                             for (int i = 0; i < piloteArray.length(); i++) {
                                 JSONObject piloteObject = piloteArray.getJSONObject(i);
-
                                 Pilote pilote = new Pilote(
                                         piloteObject.getString("IdPilote"),
                                         piloteObject.getString("NomPilote"),

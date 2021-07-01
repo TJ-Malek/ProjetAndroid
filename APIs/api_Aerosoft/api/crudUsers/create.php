@@ -15,7 +15,7 @@
 
     $data = json_decode(file_get_contents("php://input"));
 
-    //$item->IdUtilisateur = $data->IdUtilisateur;
+    $item->IdUtilisateur = $data->IdUtilisateur;
     $item->Nom = $data->Nom;
     $item->Prenom = $data->Prenom;
     $item->Mail = $data->Mail;
