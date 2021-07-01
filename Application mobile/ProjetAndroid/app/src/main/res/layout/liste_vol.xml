@@ -2,10 +2,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context=".ListActivateUser">
-    <TextView
-        android:id="@+id/Title"
+    android:layout_height="match_parent"
+    tools:context=".listeVol"
+    android:id="@+id/listeVol">
+    <Button
+        android:id="@+id/Menu"
         android:layout_width="match_parent"
         android:layout_height="72dp"
         android:layout_gravity="bottom|center_horizontal"
@@ -15,61 +16,88 @@
         android:layout_marginBottom="10dp"
         android:gravity="center"
         android:lines="2"
-        android:text="Utilisateurs à activer"
+        android:text="Menu principal"
         android:textSize="30dp"
         android:textStyle="bold"
         android:background="@color/purple_500"
         android:textColor="@color/white"/>
     <TextView
-        android:id="@+id/IdUtilisateurTitle"
+        android:id="@+id/Title"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/purple_500"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:lines="2"
+        android:text="Vols"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/Menu"/>
+    <TextView
+        android:id="@+id/NumVolTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="8dp"
-        android:text="Id"
+        android:text="NumVol"
         android:textSize="17sp"
         android:textStyle="bold"
         android:layout_below="@+id/Title"
         android:textColor="@color/purple_500"/>
     <TextView
-        android:id="@+id/FullNameTitle"
+        android:id="@+id/AeroportDeptTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
+        android:layout_marginLeft="6dp"
         android:layout_marginTop="8dp"
-        android:text="Nom complet"
+        android:text="AeroDept"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:layout_toRightOf="@id/IdUtilisateurTitle"
+        android:layout_toRightOf="@id/NumVolTitle"
         android:layout_below="@+id/Title"
         android:textColor="@color/purple_500"/>
     <TextView
-        android:id="@+id/MailTitle"
+        android:id="@+id/HDepartTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="8dp"
-        android:text="Mail"
+        android:text="HDepart"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:layout_toRightOf="@id/FullNameTitle"
+        android:layout_toRightOf="@id/AeroportDeptTitle"
         android:layout_below="@+id/Title"
-        android:textColor="@color/purple_500"
-        />
+        android:textColor="@color/purple_500"/>
     <TextView
-        android:id="@+id/StatutTitle"
+        android:id="@+id/AeroportArrTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="8dp"
-        android:text="Statut"
+        android:text="AeroArr"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:layout_toRightOf="@id/MailTitle"
+        android:layout_toRightOf="@id/HDepartTitle"
+        android:layout_below="@+id/Title"
+        android:textColor="@color/purple_500"/>
+    <TextView
+        android:id="@+id/HArriveeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="8dp"
+        android:text="HArrivee"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_toRightOf="@id/AeroportArrTitle"
         android:layout_below="@+id/Title"
         android:textColor="@color/purple_500"
         />
-
     <ScrollView
         android:id="@+id/layout"
         android:layout_height="match_parent"
@@ -80,7 +108,7 @@
         android:fillViewport="true"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:layout_below="@+id/StatutTitle"
+        android:layout_below="@+id/HArriveeTitle"
         >
         <HorizontalScrollView
             android:id="@+id/horizontalView"
@@ -96,22 +124,9 @@
                 android:background="#FAFAFA"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/MatriculeTitle"/>
-
-
+                android:layout_below="@id/HArriveeTitle"/>
         </HorizontalScrollView>
-
     </ScrollView>
-    <TextView android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/emptyElement"
-        android:text="@string/vide"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:visibility="gone"
-        android:layout_centerInParent="true"
-        android:textColor="@android:color/black"/>
-
     <ProgressBar
         android:visibility="gone"
         android:id="@+id/progressBar"
@@ -122,4 +137,3 @@
         android:theme="@color/colorPrimary"
         />
 </RelativeLayout>
-

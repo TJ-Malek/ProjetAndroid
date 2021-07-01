@@ -57,7 +57,7 @@
                 android:id="@+id/registerTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="No Accont? Register Here"
+                android:text="Pas de compte? Inscrivez-vous ici"
                 android:gravity="center"
                 android:paddingVertical="10dp"
                 android:textSize="20dp">

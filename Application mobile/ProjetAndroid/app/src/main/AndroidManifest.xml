@@ -18,13 +18,14 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".LoginActivity">
+        <activity android:name=".FirstMenu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LoginActivity" />
         <activity android:name=".listeAffectation" />
         <activity android:name=".listeVol" />
         <activity android:name=".EditVol" />
@@ -33,6 +34,7 @@
         <activity android:name=".listeAvion" />
         <activity android:name=".Inscription" />
         <activity android:name=".ListActivateUser" />
+        <activity android:name=".MenuBar" />
     </application>
 
 </manifest>

@@ -64,12 +64,12 @@ public class LoginActivity extends AppCompatActivity {
         final String userr = user.getText().toString();
         final String pswd = password.getText().toString();
         if (userr.isEmpty()) {
-            user.setError("Username or Email is required");
+            user.setError("Email requis");
             user.requestFocus();
             return;
         }
         if (pswd.isEmpty()) {
-            password.setError("Password is required");
+            password.setError("Mot de passe requis");
             password.requestFocus();
             return;
         }
@@ -89,11 +89,15 @@ public class LoginActivity extends AppCompatActivity {
                                 JSONObject jsonObject1 = jsonObject.getJSONObject("details");
                                 sharedPrefrencesHelper.setIdUtilisateur(jsonObject1.getString("IdUtilisateur"));
                                 sharedPrefrencesHelper.setIdRole(jsonObject1.getString("IdRole"));
+                                if(jsonObject1.getString("Statut").equals("1")) {
 
+                                    Toast.makeText(LoginActivity.this, "Bienvenue ! ", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(getBaseContext(), MenuBar.class));
+                                    finish();
+                                }else {
+                                    Toast.makeText(LoginActivity.this, "Compte inactif ! ", Toast.LENGTH_SHORT).show();
 
-                                Toast.makeText(LoginActivity.this, "Bienvenue ! ", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getBaseContext(), listeVol.class));
-                                finish();
+                                }
                             } else {
                                 Toast.makeText(LoginActivity.this, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
                             }

@@ -3,7 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".listePilote">
+    tools:context=".ListActivateUser"
+    android:id="@+id/UserLayout">
+    <Button
+        android:id="@+id/Menu"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:lines="2"
+        android:text="Menu principal"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:background="@color/purple_500"
+        android:textColor="@color/white"/>
     <TextView
         android:id="@+id/Title"
         android:layout_width="match_parent"
@@ -15,44 +32,58 @@
         android:layout_marginBottom="10dp"
         android:gravity="center"
         android:lines="2"
-        android:text="Pilotes"
+        android:text="Utilisateurs à activer"
         android:textSize="30dp"
         android:textStyle="bold"
         android:background="@color/purple_500"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        android:layout_below="@+id/Menu"/>
     <TextView
-        android:id="@+id/NomPiloteTitle"
+        android:id="@+id/IdUtilisateurTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="8dp"
-        android:text="Nom pilote"
+        android:text="Id"
         android:textSize="17sp"
         android:textStyle="bold"
         android:layout_below="@+id/Title"
         android:textColor="@color/purple_500"/>
     <TextView
-        android:id="@+id/PrenomPiloteTitle"
+        android:id="@+id/FullNameTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="8dp"
-        android:text="Prenom pilote"
+        android:text="Nom complet"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:layout_toRightOf="@id/NomPiloteTitle"
+        android:layout_toRightOf="@id/IdUtilisateurTitle"
         android:layout_below="@+id/Title"
         android:textColor="@color/purple_500"/>
     <TextView
-        android:id="@+id/MatriculeTitle"
+        android:id="@+id/MailTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
-        android:text="Matricule"
+        android:text="Mail"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:layout_toRightOf="@id/PrenomPiloteTitle"
+        android:layout_toRightOf="@id/FullNameTitle"
+        android:layout_below="@+id/Title"
+        android:textColor="@color/purple_500"
+        />
+    <TextView
+        android:id="@+id/StatutTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:text="Statut"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_toRightOf="@id/MailTitle"
         android:layout_below="@+id/Title"
         android:textColor="@color/purple_500"
         />
@@ -67,7 +98,7 @@
         android:fillViewport="true"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:layout_below="@+id/MatriculeTitle"
+        android:layout_below="@+id/StatutTitle"
         >
         <HorizontalScrollView
             android:id="@+id/horizontalView"
@@ -109,3 +140,4 @@
         android:theme="@color/colorPrimary"
         />
 </RelativeLayout>
+

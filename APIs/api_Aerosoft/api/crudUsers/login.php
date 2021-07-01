@@ -22,7 +22,7 @@ if (!empty($success)) {
     echo json_encode($response);
 } else {
     $response['success'] = "0";
-    $response['message'] = "Login failed. Please try again!";
+    $response['message'] = "Erreur: Login ou mot de passe erronées!";
     echo json_encode($response);
 }
 function loginMail($Maildetails) {

@@ -1,10 +1,13 @@
 package com.example.projetAndroid;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -12,6 +15,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
@@ -46,6 +51,7 @@ public class listeVol extends AppCompatActivity {
     SharedPreferences  sharedpreferences;
     List<Vol> Vol;
     FloatingActionButton Ajouter;
+    Button VolB,Avion,Pilote,Affectation,Utlisateur,Deconnexion,Menu;
     private  String API_URL;
     private static final int MENU_ITEM_EDIT = 111;
     private static final int MENU_ITEM_DELETE = 222;
@@ -56,6 +62,17 @@ public class listeVol extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.liste_vol);
+        Menu = (Button) findViewById(R.id.Menu);
+        Menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getBaseContext(), MenuBar.class));
+
+            }
+        });
+       // CreationMenu();
+        SharedPreferences sharedpreferences = getSharedPreferences("login_session", Context.MODE_PRIVATE);
+        String sessionIdRole= sharedpreferences.getString("IdRole", "not Found");
         API_URL=getString(R.string.api_link)+"/api_Aerosoft/api/crudVol/read.php";
         Log.i("message", "create.");
         listView = (ListView) findViewById(R.id.listView);
@@ -63,6 +80,7 @@ public class listeVol extends AppCompatActivity {
 
         // Affichage liste des vols
         extractVol();
+        if (sessionIdRole.equals("55555")) {
 // Création bouton ajouter
 
         Ajouter = new FloatingActionButton(this);
@@ -91,8 +109,10 @@ public class listeVol extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        // Enregistrement du menu contextuelle dans la vue listView
-        registerForContextMenu(listView);
+
+            // Enregistrement du menu contextuelle dans la vue listView
+            registerForContextMenu(listView);
+        }
     }
 
     private void extractVol() {
@@ -294,5 +314,244 @@ public class listeVol extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+    private void CreationMenu() {
+        SharedPreferences sharedpreferences = getSharedPreferences("login_session", Context.MODE_PRIVATE);
+        String sessionIdRole = sharedpreferences.getString("IdRole", "not Found");
+        // Création bouton Vol
+        VolB = new Button(this);
+        VolB.setText("Vol");
+
+        // Layout dans lequel le bouton est mis
+        RelativeLayout editLayout = (RelativeLayout) findViewById(R.id.listeVol);
+
+
+        // Width et height du bouton
+        RelativeLayout.LayoutParams editLayoutP = new RelativeLayout.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
+        // Mettre le bouton au dessous de l'EditText "HArriveeBD"
+
+        // Margins du bouton
+        // editLayoutP.setMargins(50, 50, 50, 50);
+        // Paddings du bouton
+        VolB.setPadding(20, 20, 20, 20);
+        // Border radius
+        GradientDrawable shape = new GradientDrawable();
+        shape.setShape(GradientDrawable.RECTANGLE);
+        //shape.setCornerRadius(10);
+        // Couleur background
+        shape.setColor(Color.rgb(98, 0, 238));
+        VolB.setBackground(shape);
+
+        // Taille texte
+        VolB.setTextSize(8);
+
+        // Couleur texte
+        VolB.setTextColor(Color.WHITE);
+
+        // Ajout du bouton au layout avec ses paramétres
+        editLayout.addView(VolB, editLayoutP);
+        VolB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getBaseContext(), listeVol.class));
+            }
+        });
+        if (sessionIdRole.equals("11111")) {
+            //Creation Avion
+
+            Avion = new Button(this);
+            Avion.setText("Avion");
+
+            // Layout dans lequel le bouton est mis
+            RelativeLayout editLayoutAvion = (RelativeLayout) findViewById(R.id.listeVol);
+
+
+            // Width et height du bouton
+            RelativeLayout.LayoutParams editLayoutPAvion = new RelativeLayout.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
+            // Mettre le bouton au dessous de l'EditText "HArriveeBD"
+
+
+            // Paddings du bouton
+            Avion.setPadding(20, 20, 20, 20);
+            // Border radius
+            GradientDrawable shapeAvion = new GradientDrawable();
+            shapeAvion.setShape(GradientDrawable.RECTANGLE);
+            //shape.setCornerRadius(10);
+            // Couleur background
+            shapeAvion.setColor(Color.rgb(98, 0, 238));
+            Avion.setBackground(shapeAvion);
+
+            // Taille texte
+            Avion.setTextSize(8);
+
+            // Couleur texte
+            Avion.setTextColor(Color.WHITE);
+            //editLayoutPAvion.addRule(RelativeLayout.RIGHT_OF, R.id.VolB);
+            // Ajout du bouton au layout avec ses paramétres
+            editLayoutAvion.addView(Avion, editLayoutPAvion);
+            Avion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getBaseContext(), listeAvion.class));
+                }
+            });
+        }
+        //Creation Pilote
+
+        Pilote = new Button(this);
+        Pilote.setText("Pilote");
+
+        // Layout dans lequel le bouton est mis
+        RelativeLayout editLayoutPilote = (RelativeLayout) findViewById(R.id.listeVol);
+
+
+        // Width et height du bouton
+        RelativeLayout.LayoutParams editLayoutPPilote = new RelativeLayout.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
+        // Mettre le bouton au dessous de l'EditText "HArriveeBD"
+
+
+        // Paddings du bouton
+        Pilote.setPadding(20, 20, 20, 20);
+        // Border radius
+        GradientDrawable shapePilote = new GradientDrawable();
+        shapePilote.setShape(GradientDrawable.RECTANGLE);
+        //shape.setCornerRadius(10);
+        // Couleur background
+        shapePilote.setColor(Color.rgb(98, 0, 238));
+        Pilote.setBackground(shapePilote);
+
+        // Taille texte
+        Pilote.setTextSize(8);
+
+        // Couleur texte
+        Pilote.setTextColor(Color.WHITE);
+        // Ajout du bouton au layout avec ses paramétres
+        editLayoutPilote.addView(Pilote, editLayoutPPilote);
+        //Creation Affectation
+        Pilote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getBaseContext(), listePilote.class));
+            }
+        });
+        if (sessionIdRole.equals("11111")) {
+            Affectation = new Button(this);
+            Affectation.setText("Affectation");
+
+            // Layout dans lequel le bouton est mis
+            RelativeLayout editLayoutAffectation = (RelativeLayout) findViewById(R.id.listeVol);
+
+
+            // Width et height du bouton
+            RelativeLayout.LayoutParams editLayoutPAffectation = new RelativeLayout.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
+            // Mettre le bouton au dessous de l'EditText "HArriveeBD"
+
+
+            // Paddings du bouton
+            Affectation.setPadding(20, 20, 20, 20);
+            // Border radius
+            GradientDrawable shapeAffectation = new GradientDrawable();
+            shapeAffectation.setShape(GradientDrawable.RECTANGLE);
+            //shape.setCornerRadius(10);
+            // Couleur background
+            shapeAffectation.setColor(Color.rgb(98, 0, 238));
+            Affectation.setBackground(shapeAffectation);
+
+            // Taille texte
+            Affectation.setTextSize(8);
+
+            // Couleur texte
+            Affectation.setTextColor(Color.WHITE);
+            // Ajout du bouton au layout avec ses paramétres
+            editLayoutAffectation.addView(Affectation, editLayoutPAffectation);
+            Affectation.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getBaseContext(), listeAffectation.class));
+                }
+            });
+        }
+        if (sessionIdRole.equals("55555")) {
+            //Creation Utlisateur
+
+            Utlisateur = new Button(this);
+            Utlisateur.setText("Utlisateur");
+
+            // Layout dans lequel le bouton est mis
+            RelativeLayout editLayoutUtlisateur = (RelativeLayout) findViewById(R.id.listeVol);
+
+
+            // Width et height du bouton
+            RelativeLayout.LayoutParams editLayoutPUtlisateur = new RelativeLayout.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
+            // Mettre le bouton au dessous de l'EditText "HArriveeBD"
+
+
+            // Paddings du bouton
+            Utlisateur.setPadding(20, 20, 20, 20);
+            // Border radius
+            GradientDrawable shapeUtlisateur = new GradientDrawable();
+            shapeUtlisateur.setShape(GradientDrawable.RECTANGLE);
+            //shape.setCornerRadius(10);
+            // Couleur background
+            shapeUtlisateur.setColor(Color.rgb(98, 0, 238));
+            Utlisateur.setBackground(shapeUtlisateur);
+
+            // Taille texte
+            Utlisateur.setTextSize(7);
+
+            // Couleur texte
+            Utlisateur.setTextColor(Color.WHITE);
+            // Ajout du bouton au layout avec ses paramétres
+            editLayoutUtlisateur.addView(Utlisateur, editLayoutPUtlisateur);
+            Utlisateur.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getBaseContext(), ListActivateUser.class));
+
+                }
+            });
+        }
+        // Création bouton Deconnexion
+        Deconnexion = new Button(this);
+        Deconnexion.setText("Déconnexion");
+
+        // Layout dans lequel le bouton est mis
+        RelativeLayout editLayoutDeconnexion = (RelativeLayout) findViewById(R.id.listeVol);
+
+
+        // Width et height du bouton
+        RelativeLayout.LayoutParams editLayoutPDeconnexion = new RelativeLayout.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
+        // Mettre le bouton au dessous de l'EditText "HArriveeBD"
+
+        // Margins du bouton
+        // editLayoutP.setMargins(50, 50, 50, 50);
+        // Paddings du bouton
+        Deconnexion.setPadding(20, 20, 20, 20);
+        // Border radius
+        GradientDrawable shapeDeconnexion = new GradientDrawable();
+        shapeDeconnexion.setShape(GradientDrawable.RECTANGLE);
+        //shape.setCornerRadius(10);
+        // Couleur background
+        shapeDeconnexion.setColor(Color.rgb(98, 0, 238));
+        Deconnexion.setBackground(shape);
+
+        // Taille texte
+        Deconnexion.setTextSize(5);
+
+        // Couleur texte
+        Deconnexion.setTextColor(Color.WHITE);
+
+        // Ajout du bouton au layout avec ses paramétres
+        editLayoutDeconnexion.addView(Deconnexion, editLayoutPDeconnexion);
+        Deconnexion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences preferences =getSharedPreferences("llogin_session",Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                editor.apply();
+                startActivity(new Intent(getBaseContext(),LoginActivity.class));
+            }
+        });
     }
 }

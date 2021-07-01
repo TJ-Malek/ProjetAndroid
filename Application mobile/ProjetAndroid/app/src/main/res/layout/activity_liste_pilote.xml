@@ -2,113 +2,128 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-
-    tools:context=".listeAvion">
-
-    <TextView
-        android:id="@+id/Title"
+    android:layout_height="wrap_content"
+    tools:context=".listePilote"
+    android:id="@+id/listePilote">
+    <Button
+        android:id="@+id/Menu"
         android:layout_width="match_parent"
         android:layout_height="72dp"
-
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginLeft="3dp"
         android:layout_marginTop="3dp"
         android:layout_marginRight="3dp"
-
         android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:lines="2"
+        android:text="Menu principal"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:background="@color/purple_500"
+        android:textColor="@color/white"/>
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:lines="2"
+        android:text="Pilotes"
+        android:textSize="30dp"
+        android:textStyle="bold"
         android:background="@color/purple_500"
         android:textColor="@color/white"
-        android:gravity="center"
-
-        android:lines="2"
-        android:text="Avions"
-        android:textSize="30dp"
-        android:textStyle="bold" />
-
+        android:layout_below="@+id/Menu"/>
     <TextView
-        android:id="@+id/NumAvionTitle"
+        android:id="@+id/NomPiloteTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_below="@+id/Title"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="8dp"
-        android:text="NumAvion"
+        android:text="Nom pilote"
         android:textSize="17sp"
         android:textStyle="bold"
+        android:layout_below="@+id/Title"
         android:textColor="@color/purple_500"/>
-
     <TextView
-        android:id="@+id/TypeAvionTitle"
+        android:id="@+id/PrenomPiloteTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_below="@+id/Title"
-        android:layout_marginLeft="6dp"
+        android:layout_marginLeft="12dp"
         android:layout_marginTop="8dp"
-        android:layout_toRightOf="@id/NumAvionTitle"
-        android:text="TypeAvion"
+        android:text="Prenom pilote"
         android:textSize="17sp"
         android:textStyle="bold"
+        android:layout_toRightOf="@id/NomPiloteTitle"
+        android:layout_below="@+id/Title"
         android:textColor="@color/purple_500"/>
-
     <TextView
-        android:id="@+id/BaseAeroportTitle"
+        android:id="@+id/MatriculeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Title"
-        android:layout_marginStart="70dp"
+        android:layout_marginStart="80dp"
         android:layout_marginTop="8dp"
-        android:layout_toRightOf="@id/TypeAvionTitle"
-        android:text="BaseAeroport"
+        android:text="Matricule"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:textColor="@color/purple_500"/>
-
-
-    <!-- android:layout_width="match_parent" -->
+        android:layout_toRightOf="@id/PrenomPiloteTitle"
+        android:layout_below="@+id/Title"
+        android:textColor="@color/purple_500"
+        />
 
     <ScrollView
         android:id="@+id/layout"
+        android:layout_height="match_parent"
+        android:scrollbars="horizontal|vertical"
         android:layout_width="match_parent"
-        android:layout_height="439dp"
-        android:layout_below="@+id/BaseAeroportTitle"
         android:layout_marginTop="5dip"
+        android:scrollbarStyle="outsideInset"
         android:fillViewport="true"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:scrollbarStyle="outsideInset"
-        android:scrollbars="horizontal|vertical">
-
-
+        android:layout_below="@+id/MatriculeTitle"
+        >
         <HorizontalScrollView
             android:id="@+id/horizontalView"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:scrollbars="horizontal|vertical"
+            android:layout_width="wrap_content"
             android:layout_marginTop="5dip"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:scrollbars="horizontal|vertical">
-
-            <!-- android:layout_below="@+id/BaseAeroportTitle" -->
+            >
             <ListView
                 android:id="@+id/listView"
+                android:background="#FAFAFA"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@+id/BaseAeroportTitle"
+                android:layout_below="@id/MatriculeTitle"/>
 
-                android:background="#FAFAFA" />
+
         </HorizontalScrollView>
+
     </ScrollView>
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/emptyElement"
+        android:text="@string/vide"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:textColor="@android:color/black"/>
 
     <ProgressBar
+        android:visibility="gone"
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:theme="@color/colorPrimary"
-        android:visibility="gone" />
-
+        />
 </RelativeLayout>
