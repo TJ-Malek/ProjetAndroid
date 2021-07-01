@@ -223,7 +223,7 @@ public class listeVol extends AppCompatActivity {
         // Requette POST
         try {
             RequestQueue requestQueue = Volley.newRequestQueue(listeVol.this);
-            String URL = getString(R.string.api_link)+"/api_Aerosoft/api/crudVol/delete.php";
+            String URL = "http://10.75.25.176:8080/api_Aerosoft/api/crudVol/delete.php";
             JSONObject jsonBody = new JSONObject();
             String NumVol = String.valueOf(selectedVol.getNumVol());
 
