@@ -14,7 +14,7 @@
     $item = new Vol($db);
 
     $data = json_decode(file_get_contents("php://input"));
-    $item->NumVol = $data->NumVol;
+    
     $item->AeroportDept = $data->AeroportDept;
     $item->HDepart = $data->HDepart;
     $item->AeroportArr = $data->AeroportArr;

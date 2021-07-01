@@ -1,20 +1,13 @@
 package com.example.projetAndroid;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -84,11 +77,15 @@ public class AjoutVol extends AppCompatActivity  {
                 }
             });
         extractAeroports();
+        AeroportDeptBD.setSelection(0);
+        AeroportArrBD.setSelection(0);
+        //Log.i("*******AeroportDeptBD val 1 = "," "+AeroportDeptBD.getItemAtPosition(0));
         }
 
 
     private void CreateVol() {
         try {
+
             // Requette POST
             RequestQueue requestQueue = Volley.newRequestQueue(AjoutVol.this);
             String URL = getString(R.string.api_link)+"/api_Aerosoft/api/crudVol/create.php";
@@ -99,7 +96,7 @@ public class AjoutVol extends AppCompatActivity  {
             String HDepart = String.valueOf(HDepartBD.getText() + ":00");
             String AeroportArr = String.valueOf(AeroportArrBD.getSelectedItem());
             String HArrivee = String.valueOf(HArriveeBD.getText() + ":00");
-            Log.i("*******************dept selected = ",String.valueOf(AeroportDeptBD.getSelectedItem()));
+            Log.i("*******************dept selected = ",AeroportDept);
 
             jsonBody.put("AeroportDept", AeroportDept);
             jsonBody.put("HDepart", HDepart);
@@ -183,7 +180,11 @@ public class AjoutVol extends AppCompatActivity  {
                                 JSONObject aeroportObject = AeroportArray.getJSONObject(i);
                                 aeroprtsArray.add(aeroportObject.getString("IdAeroport"));
                             }
+                            AeroportDeptBD.setSelection(0);
+                            AeroportArrBD.setSelection(0);
 
+                            Log.i("*******AeroportDeptBD selected = "," "+AeroportDeptBD.getSelectedItem());
+                            adapterSpinner();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -206,26 +207,28 @@ public class AjoutVol extends AppCompatActivity  {
 
         //adding the string request to request queue
         requestQueue.add(stringRequest);
-        AeroportDeptBD.setSelection(1);
-        AeroportArrBD.setSelection(1);
-        ArrayAdapter ad
-                = new ArrayAdapter(
-                this,
-                android.R.layout.simple_spinner_item,
-                aeroprtsArray);
 
-        // set simple layout resource file
-        // for each item of spinner
-        ad.setDropDownViewResource(
-                android.R.layout
-                        .simple_spinner_dropdown_item);
 
-        // Set the ArrayAdapter (ad) data on the
-        // Spinner which binds data to spinner
-        AeroportDeptBD.setAdapter(ad);
-        AeroportArrBD.setAdapter(ad);
     }
+private void adapterSpinner(){
 
+    ArrayAdapter ad
+            = new ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item,
+            aeroprtsArray);
+
+    // set simple layout resource file
+    // for each item of spinner
+    ad.setDropDownViewResource(
+            android.R.layout
+                    .simple_spinner_dropdown_item);
+
+    // Set the ArrayAdapter (ad) data on the
+    // Spinner which binds data to spinner
+    AeroportDeptBD.setAdapter(ad);
+    AeroportArrBD.setAdapter(ad);
+}
 
 }
 

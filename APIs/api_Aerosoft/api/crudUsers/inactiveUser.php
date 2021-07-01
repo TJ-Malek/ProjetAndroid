@@ -29,7 +29,9 @@
                 "Nom" => $Nom,
                 "Prenom" => $Prenom,
                 "Mail" => $Mail,
-                "Statut" => $Statut
+                "MotDePasse" => $MotDePasse,
+                "Statut" => $Statut,
+                "IdRole" => $IdRole
             );
 
             array_push($UserArr["utilisateurs"], $e);
@@ -39,7 +41,7 @@
 
     else{
         echo json_encode(
-            array("message" => "No record found.")
+            array("utilisateurs" => "No record found.")
         );
     }
 ?>

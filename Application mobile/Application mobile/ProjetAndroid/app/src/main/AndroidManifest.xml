@@ -32,6 +32,7 @@
         <activity android:name=".listePilote" />
         <activity android:name=".listeAvion" />
         <activity android:name=".Inscription" />
+        <activity android:name=".ListActivateUser" />
     </application>
 
 </manifest>

@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                                 sharedPrefrencesHelper.setIdRole(jsonObject1.getString("IdRole"));
 
 
-                                Toast.makeText(LoginActivity.this, "Login Successfully! ", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Bienvenue ! ", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getBaseContext(), listeVol.class));
                                 finish();
                             } else {

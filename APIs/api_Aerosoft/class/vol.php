@@ -30,6 +30,9 @@
 
         // CREATE
         public function createVol(){
+            do {
+                $this->NumVol ="IT".rand(100,999);
+            }while($this->VerifVol()!=null);
             if($this->VerifVol()==null){
             $sqlQuery = "INSERT INTO
                         ". $this->db_table ."
@@ -58,11 +61,13 @@
             $stmt->bindParam(":HArrivee", $this->HArrivee);
            
             if($stmt->execute()){
+                http_response_code(201);
                return true;
             }
             return false;
         }
         else {
+            
             echo "Vol existe déjà dans la base";
         }
         }
