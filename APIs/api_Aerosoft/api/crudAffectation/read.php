@@ -39,7 +39,7 @@
     else{
         
         echo json_encode(
-            array("message" => "Aucune affectation trouvée.")
+            array("affectation" => "Aucune affectation trouvée.")
         );
     }
 ?>
