@@ -117,6 +117,15 @@
                 android:background="#FAFAFA" />
         </HorizontalScrollView>
     </ScrollView>
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/emptyElement"
+        android:text="@string/vide"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:textColor="@android:color/black"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

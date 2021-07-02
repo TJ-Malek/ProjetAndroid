@@ -41,7 +41,7 @@
     else{
         
         echo json_encode(
-            array("message" => "No record found.")
+            array("utilisateurs" => "No record found.")
         );
     }
 ?>
