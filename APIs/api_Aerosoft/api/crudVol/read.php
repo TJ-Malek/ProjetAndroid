@@ -40,7 +40,7 @@
     else{
         
         echo json_encode(
-            array("message" => "Aucun vol trouvé.")
+            array("vol" => "No record found.")
         );
     }
 ?>

@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,7 +36,7 @@ public class listeAvion extends AppCompatActivity{
         ListView listView;
         SharedPreferences sharedpreferences;
         List<Avion> avions;
-        TextView msgEmpty;
+
         private String API_URL;
         Button Vol,Avion,Pilote,Affectation,Utlisateur,Deconnexion,Menu;
         // Adapter adapter;
@@ -59,7 +58,7 @@ public class listeAvion extends AppCompatActivity{
 
             listView = (ListView) findViewById(R.id.listView);
             avions= new ArrayList<>();
-            msgEmpty = (TextView) findViewById(R.id.emptyElement);
+
             // Affichage liste des avions
             extractAvions();
 
@@ -86,10 +85,6 @@ public class listeAvion extends AppCompatActivity{
                             try {
                                 // Récupération du résultat
                                 JSONObject obj = new JSONObject(response);
-                                // Verification du contenu de la liste
-                                if (obj.getString("avion").equals("No record found.")){
-                                    msgEmpty.setVisibility(View.VISIBLE);
-                                }
                                 // nom de table "avion" dans l'api qui le json
                                 JSONArray volArray = obj.getJSONArray("avion");
 

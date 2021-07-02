@@ -51,7 +51,6 @@ public class listeVol extends AppCompatActivity {
     SharedPreferences  sharedpreferences;
     List<Vol> Vol;
     FloatingActionButton Ajouter;
-    TextView msgEmpty;
     Button VolB,Avion,Pilote,Affectation,Utlisateur,Deconnexion,Menu;
     private  String API_URL;
     private static final int MENU_ITEM_EDIT = 111;
@@ -78,16 +77,15 @@ public class listeVol extends AppCompatActivity {
         Log.i("message", "create.");
         listView = (ListView) findViewById(R.id.listView);
         Vol= new ArrayList<>();
-        msgEmpty = (TextView) findViewById(R.id.emptyElement);
+
         // Affichage liste des vols
         extractVol();
         if (sessionIdRole.equals("55555")) {
-        // Création bouton ajouter
+// Création bouton ajouter
 
         Ajouter = new FloatingActionButton(this);
         // Layout dans lequel le bouton est mis
         RelativeLayout editLayout = (RelativeLayout) findViewById(R.id.listeVol);
-
 
 
         // Width et height du bouton
@@ -136,11 +134,6 @@ public class listeVol extends AppCompatActivity {
                         try {
                             // Récupération du résultat
                             JSONObject obj = new JSONObject(response);
-
-                            // Verification du contenu de la liste
-                            if (obj.getString("vol").equals("No record found.")){
-                                msgEmpty.setVisibility(View.VISIBLE);
-                            }
 
                             JSONArray volArray = obj.getJSONArray("vol");
 

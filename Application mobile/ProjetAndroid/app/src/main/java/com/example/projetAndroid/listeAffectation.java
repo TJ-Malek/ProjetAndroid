@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,7 +38,6 @@ public class listeAffectation extends AppCompatActivity { ListView listView;
     private String API_URL;
     private static final int MENU_ITEM_EDIT = 111;
     private static final int MENU_ITEM_DELETE = 222;
-    TextView msgEmpty;
     Button Vol,Avion,Pilote,AffectationB,Utlisateur,Deconnexion,Menu;
     // Adapter adapter;
 
@@ -61,7 +59,7 @@ public class listeAffectation extends AppCompatActivity { ListView listView;
 
         listView = (ListView) findViewById(R.id.listViewAffectation);
         Affectation= new ArrayList<>();
-        msgEmpty = (TextView) findViewById(R.id.emptyElement);
+
         // Affichage liste des affectations
         extractAffectation();
 
@@ -89,11 +87,6 @@ public class listeAffectation extends AppCompatActivity { ListView listView;
                         try {
                             // Récupération du résultat
                             JSONObject obj = new JSONObject(response);
-
-                            // Verification du contenu de la liste
-                            if (obj.getString("affectation").equals("No record found.")){
-                                msgEmpty.setVisibility(View.VISIBLE);
-                            }
 
                             JSONArray affectationArray = obj.getJSONArray("affectation");
 

@@ -36,7 +36,7 @@
     else{
         
         echo json_encode(
-            array("aeroport" => "Aucun avion trouvé.")
+            array("aeroport" => "No record found.")
         );
     }
 ?>

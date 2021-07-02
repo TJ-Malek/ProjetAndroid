@@ -39,7 +39,7 @@
     else{
         
         echo json_encode(
-            array("pilote" => "No record found.")
+            array("message" => "No record found.")
         );
     }
 ?>
