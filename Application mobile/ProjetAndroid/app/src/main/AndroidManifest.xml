@@ -35,6 +35,7 @@
         <activity android:name=".Inscription" />
         <activity android:name=".ListActivateUser" />
         <activity android:name=".MenuBar" />
+        <activity android:name=".listeUser" />
     </application>
 
 </manifest>

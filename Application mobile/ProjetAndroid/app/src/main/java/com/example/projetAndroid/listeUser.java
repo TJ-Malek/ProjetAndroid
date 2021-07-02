@@ -7,21 +7,129 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MenuBar extends AppCompatActivity {
-    Button Vol,Avion,Pilote,Affectation,Utlisateur,Deconnexion;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class listeUser extends AppCompatActivity {
+    ListView listView;
+    SharedPreferences sharedpreferences;
+    List<User> User;
+    TextView msgEmpty;
+    Button Vol,Avion,UserB,Affectation,Utlisateur,Deconnexion;
+
+    private String API_URL;
+    private static final int MENU_ITEM_EDIT = 111;
+    private static final int MENU_ITEM_DELETE = 222;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_bar);
-        CreationMenu();
-    }
+        setContentView(R.layout.liste_user);
 
+        //CreationMenu();
+        API_URL=getString(R.string.api_link)+"/api_Reseau_social/api/crudUsers/read.php";
+        Log.i("message", "create.");
+        listView = (ListView) findViewById(R.id.listView);
+
+        User= new ArrayList<>();
+
+        msgEmpty = (TextView) findViewById(R.id.emptyElement);
+
+        // Affichage liste des vols
+        extractUser();
+
+        // Enregistrement du menu contextuelle dans la vue listView
+        registerForContextMenu(listView);
+    }
+    private void extractUser() {
+
+        final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        //making the progressbar visible
+        progressBar.setVisibility(View.VISIBLE);
+
+        // Requette GET
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, API_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        //hiding the progressbar after completion
+                        progressBar.setVisibility(View.INVISIBLE);
+
+
+                        try {
+                            // Récupération du résultat
+                            JSONObject obj = new JSONObject(response);
+
+                            // Verification du contenu de la liste
+                            if (obj.getString("utilisateur").equals("No record found.")){
+                                msgEmpty.setVisibility(View.VISIBLE);
+                            }
+
+                            JSONArray userArray = obj.getJSONArray("utilisateur");
+                            //JSONArray userMsg = obj.getJSONArray("message");
+                            Log.i("msg",userArray.toString());
+
+                            // Pour chaque user dans l'array récupéré
+                            for (int i = 0; i < userArray.length(); i++) {
+                                JSONObject userObject = userArray.getJSONObject(i);
+                                User user = new User(
+                                        userObject.getString("Role"),
+                                        userObject.getString("NomUtilisateur"),
+                                        userObject.getString("Mail")
+
+                                );
+
+                                User.add(user);
+
+                            }
+                            // Ajouter les users à listView
+                            adapterUser adapterUser = new adapterUser(User, getApplicationContext());
+
+                            listView.setAdapter(adapterUser);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //displaying the error in toast if occurrs
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+        //creating a request queue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
+        //adding the string request to request queue
+        requestQueue.add(stringRequest);
+
+    }
     private void CreationMenu() {
         SharedPreferences sharedpreferences = getSharedPreferences("login_session", Context.MODE_PRIVATE);
         String sessionIdRole = sharedpreferences.getString("IdRole", "not Found");
@@ -103,42 +211,42 @@ public class MenuBar extends AppCompatActivity {
                 }
             });
         }
-        //Creation Pilote
+        //Creation User
 
-        Pilote = new Button(this);
-        Pilote.setText("Pilote");
+        UserB = new Button(this);
+        UserB.setText("User");
 
         // Layout dans lequel le bouton est mis
-        LinearLayout editLayoutPilote = (LinearLayout) findViewById(R.id.MenuBar);
+        LinearLayout editLayoutUser = (LinearLayout) findViewById(R.id.MenuBar);
 
 
         // Width et height du bouton
-        LinearLayout.LayoutParams editLayoutPPilote = new LinearLayout.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams editLayoutPUser = new LinearLayout.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
         // Mettre le bouton au dessous de l'EditText "HArriveeBD"
 
 
         // Paddings du bouton
-        Pilote.setPadding(20, 20, 20, 20);
+        UserB.setPadding(20, 20, 20, 20);
         // Border radius
-        GradientDrawable shapePilote = new GradientDrawable();
-        shapePilote.setShape(GradientDrawable.RECTANGLE);
+        GradientDrawable shapeUser = new GradientDrawable();
+        shapeUser.setShape(GradientDrawable.RECTANGLE);
         //shape.setCornerRadius(10);
         // Couleur background
-        shapePilote.setColor(Color.rgb(98, 0, 238));
-        Pilote.setBackground(shapePilote);
+        shapeUser.setColor(Color.rgb(98, 0, 238));
+        UserB.setBackground(shapeUser);
 
         // Taille texte
-        Pilote.setTextSize(8);
+        UserB.setTextSize(8);
 
         // Couleur texte
-        Pilote.setTextColor(Color.WHITE);
+        UserB.setTextColor(Color.WHITE);
         // Ajout du bouton au layout avec ses paramétres
-        editLayoutPilote.addView(Pilote, editLayoutPPilote);
+        editLayoutUser.addView(UserB, editLayoutPUser);
         //Creation Affectation
-        Pilote.setOnClickListener(new View.OnClickListener() {
+        UserB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getBaseContext(), listePilote.class));
+                startActivity(new Intent(getBaseContext(), listeUser.class));
             }
         });
         if (sessionIdRole.equals("11111")) {
@@ -257,8 +365,9 @@ public class MenuBar extends AppCompatActivity {
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.clear();
                 editor.apply();
-                startActivity(new Intent(getBaseContext(),FirstMenu.class));
+                startActivity(new Intent(getBaseContext(),LoginActivity.class));
             }
         });
     }
+
 }

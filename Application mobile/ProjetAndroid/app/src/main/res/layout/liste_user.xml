@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".listeUser"
+    android:id="@+id/listeUser">
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:lines="2"
+        android:text="Utlisateurs"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:background="@color/purple_500"
+        android:textColor="@color/white"
+       />
+    <TextView
+        android:id="@+id/NomUtilisateurTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="8dp"
+        android:text="Nom utilisateur"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/Title"
+        android:textColor="@color/purple_500"/>
+    <TextView
+        android:id="@+id/MailTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="64dp"
+        android:layout_marginTop="8dp"
+        android:text="Mail"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_toRightOf="@id/NomUtilisateurTitle"
+        android:layout_below="@+id/Title"
+        android:textColor="@color/purple_500"/>
+    <TextView
+        android:id="@+id/RoleTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="8dp"
+        android:text="Role"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:layout_toRightOf="@id/MailTitle"
+        android:layout_below="@+id/Title"
+        android:textColor="@color/purple_500"
+        />
+
+    <ScrollView
+        android:id="@+id/layout"
+        android:layout_height="match_parent"
+        android:scrollbars="horizontal|vertical"
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dip"
+        android:scrollbarStyle="outsideInset"
+        android:fillViewport="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:layout_below="@+id/MailTitle"
+        >
+        <HorizontalScrollView
+            android:id="@+id/horizontalView"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal|vertical"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="5dip"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            >
+            <ListView
+                android:id="@+id/listView"
+                android:background="#FAFAFA"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/MailTitle"/>
+
+
+        </HorizontalScrollView>
+
+    </ScrollView>
+    <TextView android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/emptyElement"
+        android:text="@string/vide"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:textColor="@android:color/black"/>
+
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:theme="@color/colorPrimary"
+        />
+</RelativeLayout>
